@@ -1,0 +1,30 @@
+{
+  "name": "veggicity_backend",
+  "version": "0.1.0",
+  "description": "Backend part of the Veggicity mobile app.",
+  "main": "backend.json",
+  "scripts": {
+    "start": "node_modules/node-red/red.js -s nodered.config.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Adri-7/veggicity_backend.git"
+  },
+  "keywords": [
+    "nodejs",
+    "rode-red",
+    "api",
+    "iot",
+    "rest"
+  ],
+  "author": "Adrien Coppola, Selma Semmaoui, Reda Ayassi, Ruxandra Pomana, Thibault Noilly, William Hiver",
+  "license": "WTFPL",
+  "bugs": {
+    "url": "https://github.com/Adri-7/veggicity_backend/issues"
+  },
+  "homepage": "https://github.com/Adri-7/veggicity_backend#readme",
+  "dependencies": {
+    "node-red": "^0.16.2"
+  }
+}
