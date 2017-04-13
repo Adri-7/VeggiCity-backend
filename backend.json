@@ -1,0 +1,66 @@
+[
+    {
+        "id": "cf757416.97ca88",
+        "type": "tab",
+        "label": "Flow 1"
+    },
+    {
+        "id": "17557121.6b5617",
+        "type": "http in",
+        "z": "cf757416.97ca88",
+        "name": "App API Server",
+        "url": "/api/app",
+        "method": "get",
+        "swaggerDoc": "",
+        "x": 195.5,
+        "y": 325,
+        "wires": [
+            [
+                "284a0285.11f016"
+            ]
+        ]
+    },
+    {
+        "id": "b1ae170e.beb5e",
+        "type": "http in",
+        "z": "cf757416.97ca88",
+        "name": "Censors API Server",
+        "url": "/api/censors",
+        "method": "get",
+        "swaggerDoc": "",
+        "x": 186.5,
+        "y": 409,
+        "wires": [
+            [
+                "284a0285.11f016"
+            ]
+        ]
+    },
+    {
+        "id": "c18675e1.151718",
+        "type": "http response",
+        "z": "cf757416.97ca88",
+        "name": "Server response",
+        "x": 682.5,
+        "y": 356,
+        "wires": []
+    },
+    {
+        "id": "284a0285.11f016",
+        "type": "template",
+        "z": "cf757416.97ca88",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "Hi! I'm the wonderful Veggicity server!",
+        "x": 464.5,
+        "y": 357,
+        "wires": [
+            [
+                "c18675e1.151718"
+            ]
+        ]
+    }
+]
