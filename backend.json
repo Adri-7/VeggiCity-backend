@@ -16,7 +16,7 @@
         "y": 325,
         "wires": [
             [
-                "284a0285.11f016"
+                "a7695812.f1ac8"
             ]
         ]
     },
@@ -28,11 +28,11 @@
         "url": "/api/censors",
         "method": "get",
         "swaggerDoc": "",
-        "x": 186.5,
-        "y": 409,
+        "x": 189.5,
+        "y": 398,
         "wires": [
             [
-                "284a0285.11f016"
+                "a7695812.f1ac8"
             ]
         ]
     },
@@ -41,8 +41,8 @@
         "type": "http response",
         "z": "cf757416.97ca88",
         "name": "Server response",
-        "x": 682.5,
-        "y": 356,
+        "x": 1474.27783203125,
+        "y": 402.66673278808594,
         "wires": []
     },
     {
@@ -54,9 +54,235 @@
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": "Hi! I'm the wonderful Veggicity server!",
-        "x": 464.5,
-        "y": 357,
+        "template": "Hi! I'm the wonderful Veggicity server!\nSorry but I didn't understand your request...",
+        "x": 786.7222290039062,
+        "y": 801.3333129882812,
+        "wires": [
+            [
+                "c18675e1.151718"
+            ]
+        ]
+    },
+    {
+        "id": "a7695812.f1ac8",
+        "type": "switch",
+        "z": "cf757416.97ca88",
+        "name": "Dispatch API method",
+        "property": "payload.method",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "getJardins",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "getJardin",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "outputs": 3,
+        "x": 493.5,
+        "y": 330,
+        "wires": [
+            [
+                "9de1f28d.03dbf8"
+            ],
+            [
+                "8f8e93d4.f0c1a"
+            ],
+            [
+                "284a0285.11f016"
+            ]
+        ]
+    },
+    {
+        "id": "5cbe6b74.161ed4",
+        "type": "template",
+        "z": "cf757416.97ca88",
+        "name": "getJardin",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "json",
+        "syntax": "plain",
+        "template": "{\n    \"id\": 1,\n    \"name\": \"Parc Blandan\",\n    \"position\": {\n        \"lat\": 45.745382,\n        \"lon\": 4.854330\n    }\n}",
+        "x": 1009.5556335449219,
+        "y": 337.2222442626953,
+        "wires": [
+            [
+                "a0b41c93.325648"
+            ]
+        ]
+    },
+    {
+        "id": "9de1f28d.03dbf8",
+        "type": "template",
+        "z": "cf757416.97ca88",
+        "name": "getJardins",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "json",
+        "syntax": "plain",
+        "template": "{\n    \"method\": \"getPlantations\",\n    \"plantations\": [\n        {\n            \"id\": 1,\n            \"name\": \"Parc Blandan\",\n            \"position\": {\n                \"lat\": 45.745382,\n                \"lon\": 4.854330\n            }\n        },\n        {\n            \"id\": 2,\n            \"name\": \"La Duchère\",\n            \"position\": {\n                \"lat\":  45.782610,\n                \"lon\": 4.793357\n            }\n        },\n        {\n            \"id\": 3,\n            \"name\": \"Salle des Rancy\",\n            \"position\": {\n                \"lat\": 45.755928,\n                \"lon\": 4.847651\n            }\n        },\n        {\n            \"id\": 4,\n            \"name\": \"Jardins partagés Graine de Lait\",\n            \"position\": {\n                \"lat\": 45.736063,\n                \"lon\": 4.832576\n            }\n        }\n    ]\n}",
+        "x": 780,
+        "y": 229,
+        "wires": [
+            [
+                "27f0a189.e2dd0e"
+            ]
+        ]
+    },
+    {
+        "id": "27f0a189.e2dd0e",
+        "type": "json",
+        "z": "cf757416.97ca88",
+        "name": "To JSON",
+        "x": 979.5,
+        "y": 233,
+        "wires": [
+            [
+                "c18675e1.151718"
+            ]
+        ]
+    },
+    {
+        "id": "8f8e93d4.f0c1a",
+        "type": "switch",
+        "z": "cf757416.97ca88",
+        "name": "Jardin ID",
+        "property": "payload.id",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "2",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "3",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "4",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "outputs": 5,
+        "x": 781.3518676757812,
+        "y": 435.9999694824219,
+        "wires": [
+            [
+                "5cbe6b74.161ed4"
+            ],
+            [
+                "d11c1ddd.f40ab8"
+            ],
+            [
+                "47415eaa.43bda8"
+            ],
+            [
+                "e0735d13.8c12d"
+            ],
+            [
+                "69aa544f.90366c"
+            ]
+        ]
+    },
+    {
+        "id": "e0735d13.8c12d",
+        "type": "template",
+        "z": "cf757416.97ca88",
+        "name": "getJardin",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "json",
+        "syntax": "plain",
+        "template": "{\n    \"id\": 4,\n    \"name\": \"Jardins partagés Graine de Lait\",\n    \"position\": {\n        \"lat\": 45.736063,\n        \"lon\": 4.832576\n    }\n}",
+        "x": 1001.1483764648438,
+        "y": 487.370361328125,
+        "wires": [
+            [
+                "a0b41c93.325648"
+            ]
+        ]
+    },
+    {
+        "id": "47415eaa.43bda8",
+        "type": "template",
+        "z": "cf757416.97ca88",
+        "name": "getJardin",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "json",
+        "syntax": "plain",
+        "template": "{\n    \"id\": 3,\n    \"name\": \"Salle des Rancy\",\n    \"position\": {\n        \"lat\": 45.755928,\n        \"lon\": 4.847651\n    }\n}",
+        "x": 1005.5927124023438,
+        "y": 436.25927734375,
+        "wires": [
+            [
+                "a0b41c93.325648"
+            ]
+        ]
+    },
+    {
+        "id": "d11c1ddd.f40ab8",
+        "type": "template",
+        "z": "cf757416.97ca88",
+        "name": "getJardin",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "json",
+        "syntax": "plain",
+        "template": "{\n    \"id\": 2,\n    \"name\": \"La Duchère\",\n    \"position\": {\n        \"lat\":  45.782610,\n        \"lon\": 4.793357\n    }\n}",
+        "x": 1010.0372314453125,
+        "y": 385.1481628417969,
+        "wires": [
+            [
+                "a0b41c93.325648"
+            ]
+        ]
+    },
+    {
+        "id": "69aa544f.90366c",
+        "type": "template",
+        "z": "cf757416.97ca88",
+        "name": "getJardin",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "json",
+        "syntax": "plain",
+        "template": "{\n    \"status\": \"error\",\n    \"message\": \"ID parameter is missing.\"\n}",
+        "x": 1005.5927124023438,
+        "y": 528.4814758300781,
+        "wires": [
+            [
+                "a0b41c93.325648"
+            ]
+        ]
+    },
+    {
+        "id": "a0b41c93.325648",
+        "type": "json",
+        "z": "cf757416.97ca88",
+        "name": "To JSON",
+        "x": 1247.8148193359375,
+        "y": 407.37037658691406,
         "wires": [
             [
                 "c18675e1.151718"
