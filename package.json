@@ -25,6 +25,8 @@
   },
   "homepage": "https://github.com/Adri-7/veggicity_backend#readme",
   "dependencies": {
-    "node-red": "^0.16.2"
+    "node-red": "^0.16.2",
+    "node-red-contrib-assert": "^1.0.2",
+    "node-red-node-mysql": "0.0.16"
   }
 }
