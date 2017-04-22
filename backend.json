@@ -2,7 +2,7 @@
     {
         "id": "cf757416.97ca88",
         "type": "tab",
-        "label": "Flow 1"
+        "label": "VeggiCity API"
     },
     {
         "id": "c0c690e.17165f",
@@ -73,6 +73,45 @@
         ]
     },
     {
+        "id": "f5cdc70a.d1345",
+        "type": "subflow",
+        "name": "Post sensor data",
+        "info": "",
+        "in": [
+            {
+                "x": 46,
+                "y": 106,
+                "wires": [
+                    {
+                        "id": "dc679df4.785a9"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 1230,
+                "y": 107.75001525878906,
+                "wires": [
+                    {
+                        "id": "e06ed683.3682f8",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 1241,
+                "y": 324,
+                "wires": [
+                    {
+                        "id": "95028bc8.7cfca",
+                        "port": 0
+                    }
+                ]
+            }
+        ]
+    },
+    {
         "id": "c0e93a6b.6b218",
         "type": "MySQLdatabase",
         "z": "",
@@ -101,15 +140,15 @@
         "id": "b1ae170e.beb5e",
         "type": "http in",
         "z": "cf757416.97ca88",
-        "name": "Censors API Server",
-        "url": "/api/censors",
-        "method": "get",
+        "name": "Sensors API Server",
+        "url": "/api/sensors",
+        "method": "post",
         "swaggerDoc": "",
-        "x": 189.5,
-        "y": 398,
+        "x": 182.5,
+        "y": 89,
         "wires": [
             [
-                "a7695812.f1ac8"
+                "caa219fc.8a0be"
             ]
         ]
     },
@@ -175,22 +214,6 @@
             ],
             [
                 "284a0285.11f016"
-            ]
-        ]
-    },
-    {
-        "id": "4711bf20.436468",
-        "type": "catch",
-        "z": "cf757416.97ca88",
-        "name": "Catch parameter error",
-        "scope": [
-            "9c2c7a2c.155328"
-        ],
-        "x": 726.166748046875,
-        "y": 551.7777709960938,
-        "wires": [
-            [
-                "568149d7.fddb88"
             ]
         ]
     },
@@ -395,6 +418,289 @@
         "wires": [
             [
                 "a6cb2200.99618"
+            ]
+        ]
+    },
+    {
+        "id": "e754f0a9.086d2",
+        "type": "catch",
+        "z": "cf757416.97ca88",
+        "name": "Catch generic errors",
+        "scope": null,
+        "x": 520.5,
+        "y": 614,
+        "wires": [
+            [
+                "5010ba9e.8d5ac4"
+            ]
+        ]
+    },
+    {
+        "id": "5010ba9e.8d5ac4",
+        "type": "template",
+        "z": "cf757416.97ca88",
+        "name": "Generic error message",
+        "field": "error.message",
+        "fieldType": "msg",
+        "format": "text",
+        "syntax": "plain",
+        "template": "Internal server error.",
+        "x": 830,
+        "y": 611,
+        "wires": [
+            [
+                "568149d7.fddb88"
+            ]
+        ]
+    },
+    {
+        "id": "caa219fc.8a0be",
+        "type": "subflow:f5cdc70a.d1345",
+        "z": "cf757416.97ca88",
+        "name": "",
+        "x": 654,
+        "y": 89,
+        "wires": [
+            [
+                "a6cb2200.99618"
+            ],
+            [
+                "617e96cc.a19c5"
+            ]
+        ]
+    },
+    {
+        "id": "dc679df4.785a9",
+        "type": "assert",
+        "z": "f5cdc70a.d1345",
+        "name": "Check measurement validity",
+        "rules": [
+            {
+                "property": "method",
+                "propertyType": "msg",
+                "type": "eq",
+                "value": "addMeasure",
+                "valueType": "str"
+            },
+            {
+                "property": "payload.data",
+                "propertyType": "msg",
+                "type": "type",
+                "value": "array"
+            },
+            {
+                "property": "payload.plantation",
+                "propertyType": "msg",
+                "type": "nnull"
+            }
+        ],
+        "x": 284,
+        "y": 108,
+        "wires": [
+            [
+                "4b7f1965.9d2f48"
+            ]
+        ]
+    },
+    {
+        "id": "891c8560.55d1",
+        "type": "split",
+        "z": "f5cdc70a.d1345",
+        "name": "Register each measure",
+        "splt": "\\n",
+        "x": 813,
+        "y": 107,
+        "wires": [
+            [
+                "dde679be.bf36d"
+            ]
+        ]
+    },
+    {
+        "id": "4b7f1965.9d2f48",
+        "type": "change",
+        "z": "f5cdc70a.d1345",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "body",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            },
+            {
+                "t": "move",
+                "p": "payload.data",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 552,
+        "y": 108,
+        "wires": [
+            [
+                "891c8560.55d1"
+            ]
+        ]
+    },
+    {
+        "id": "e06ed683.3682f8",
+        "type": "join",
+        "z": "f5cdc70a.d1345",
+        "name": "",
+        "mode": "auto",
+        "build": "string",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "timeout": "",
+        "count": "",
+        "x": 1080,
+        "y": 107.5,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f128c48c.176f9",
+        "type": "comment",
+        "z": "f5cdc70a.d1345",
+        "name": "Iterate over each measure given",
+        "info": "",
+        "x": 832.5,
+        "y": 31.25,
+        "wires": []
+    },
+    {
+        "id": "219a9093.205e48",
+        "type": "debug",
+        "z": "f5cdc70a.d1345",
+        "name": "Log measure",
+        "active": true,
+        "console": "false",
+        "complete": "payload",
+        "x": 932.5,
+        "y": 267,
+        "wires": []
+    },
+    {
+        "id": "dde679be.bf36d",
+        "type": "assert",
+        "z": "f5cdc70a.d1345",
+        "name": "Check measure object validity",
+        "rules": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "type": "type",
+                "value": "object"
+            },
+            {
+                "property": "payload.measureType",
+                "propertyType": "msg",
+                "type": "nnull"
+            },
+            {
+                "property": "payload.value",
+                "propertyType": "msg",
+                "type": "nnull"
+            }
+        ],
+        "x": 586.5,
+        "y": 268,
+        "wires": [
+            [
+                "219a9093.205e48",
+                "e06ed683.3682f8"
+            ]
+        ]
+    },
+    {
+        "id": "b5530fd1.4a08b",
+        "type": "comment",
+        "z": "f5cdc70a.d1345",
+        "name": "Check validity of the measure object",
+        "info": "Each measure must match the following format:\n\n    {\n        measureType: \"temperature\",\n        value: 26.5\n    }",
+        "x": 594.5,
+        "y": 329,
+        "wires": []
+    },
+    {
+        "id": "3a786fb0.7c0ed",
+        "type": "comment",
+        "z": "f5cdc70a.d1345",
+        "name": "Error output",
+        "info": "",
+        "x": 1340.5,
+        "y": 323,
+        "wires": []
+    },
+    {
+        "id": "95028bc8.7cfca",
+        "type": "catch",
+        "z": "f5cdc70a.d1345",
+        "name": "Catch invalid input",
+        "scope": [
+            "dde679be.bf36d",
+            "dc679df4.785a9"
+        ],
+        "x": 1065.5,
+        "y": 325,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5f0ab50a.1ba7e4",
+        "type": "link in",
+        "z": "cf757416.97ca88",
+        "name": "",
+        "links": [
+            "617e96cc.a19c5"
+        ],
+        "x": 646.5,
+        "y": 546,
+        "wires": [
+            [
+                "b3a290e5.39375"
+            ]
+        ]
+    },
+    {
+        "id": "617e96cc.a19c5",
+        "type": "link out",
+        "z": "cf757416.97ca88",
+        "name": "addMeasure error output",
+        "links": [
+            "5f0ab50a.1ba7e4"
+        ],
+        "x": 786.5,
+        "y": 136,
+        "wires": []
+    },
+    {
+        "id": "b3a290e5.39375",
+        "type": "template",
+        "z": "cf757416.97ca88",
+        "name": "Invalid input",
+        "field": "error.message",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "plain",
+        "template": "Invalid input: some required fields have been omitted.",
+        "x": 814.5,
+        "y": 544,
+        "wires": [
+            [
+                "568149d7.fddb88"
             ]
         ]
     }
