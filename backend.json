@@ -79,11 +79,11 @@
         "info": "",
         "in": [
             {
-                "x": 46,
-                "y": 106,
+                "x": 40,
+                "y": 105,
                 "wires": [
                     {
-                        "id": "dc679df4.785a9"
+                        "id": "c8e006ee.497f98"
                     }
                 ]
             }
@@ -100,11 +100,19 @@
                 ]
             },
             {
-                "x": 1241,
-                "y": 324,
+                "x": 1309,
+                "y": 374,
                 "wires": [
                     {
-                        "id": "95028bc8.7cfca",
+                        "id": "a461fffa.f50ae8",
+                        "port": 0
+                    },
+                    {
+                        "id": "838380de.374e6",
+                        "port": 0
+                    },
+                    {
+                        "id": "1aabe407.0ce9ac",
                         "port": 0
                     }
                 ]
@@ -141,7 +149,7 @@
         "type": "http in",
         "z": "cf757416.97ca88",
         "name": "Sensors API Server",
-        "url": "/api/sensors",
+        "url": "/api/sensor",
         "method": "post",
         "swaggerDoc": "",
         "x": 182.5,
@@ -476,13 +484,6 @@
         "name": "Check measurement validity",
         "rules": [
             {
-                "property": "method",
-                "propertyType": "msg",
-                "type": "eq",
-                "value": "addMeasure",
-                "valueType": "str"
-            },
-            {
                 "property": "payload.data",
                 "propertyType": "msg",
                 "type": "type",
@@ -494,11 +495,11 @@
                 "type": "nnull"
             }
         ],
-        "x": 284,
-        "y": 108,
+        "x": 243,
+        "y": 154,
         "wires": [
             [
-                "4b7f1965.9d2f48"
+                "b200420d.453858"
             ]
         ]
     },
@@ -639,8 +640,8 @@
         "z": "f5cdc70a.d1345",
         "name": "Error output",
         "info": "",
-        "x": 1340.5,
-        "y": 323,
+        "x": 1413.5,
+        "y": 371,
         "wires": []
     },
     {
@@ -652,10 +653,12 @@
             "dde679be.bf36d",
             "dc679df4.785a9"
         ],
-        "x": 1065.5,
-        "y": 325,
+        "x": 952.5,
+        "y": 356,
         "wires": [
-            []
+            [
+                "a461fffa.f50ae8"
+            ]
         ]
     },
     {
@@ -666,11 +669,11 @@
         "links": [
             "617e96cc.a19c5"
         ],
-        "x": 646.5,
-        "y": 546,
+        "x": 887.5,
+        "y": 556,
         "wires": [
             [
-                "b3a290e5.39375"
+                "568149d7.fddb88"
             ]
         ]
     },
@@ -687,21 +690,127 @@
         "wires": []
     },
     {
-        "id": "b3a290e5.39375",
+        "id": "c8e006ee.497f98",
+        "type": "assert",
+        "z": "f5cdc70a.d1345",
+        "name": "Check API method",
+        "rules": [
+            {
+                "property": "req.query.method",
+                "propertyType": "msg",
+                "type": "eq",
+                "value": "addMeasure",
+                "valueType": "str"
+            }
+        ],
+        "x": 241.5,
+        "y": 94,
+        "wires": [
+            [
+                "dc679df4.785a9"
+            ]
+        ]
+    },
+    {
+        "id": "8662de51.76b34",
+        "type": "catch",
+        "z": "f5cdc70a.d1345",
+        "name": "Catch invalid method",
+        "scope": [
+            "c8e006ee.497f98"
+        ],
+        "x": 944.5,
+        "y": 397,
+        "wires": [
+            [
+                "838380de.374e6"
+            ]
+        ]
+    },
+    {
+        "id": "a461fffa.f50ae8",
         "type": "template",
-        "z": "cf757416.97ca88",
+        "z": "f5cdc70a.d1345",
         "name": "Invalid input",
         "field": "error.message",
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "plain",
         "template": "Invalid input: some required fields have been omitted.",
-        "x": 814.5,
-        "y": 544,
+        "x": 1140,
+        "y": 355,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "838380de.374e6",
+        "type": "template",
+        "z": "f5cdc70a.d1345",
+        "name": "Invalid method",
+        "field": "error.message",
+        "fieldType": "msg",
+        "format": "text",
+        "syntax": "plain",
+        "template": "Unknown API method.",
+        "x": 1151,
+        "y": 399,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b200420d.453858",
+        "type": "assert",
+        "z": "f5cdc70a.d1345",
+        "name": "Ensure there is at least a measure",
+        "rules": [
+            {
+                "property": "payload.data.length",
+                "propertyType": "msg",
+                "type": "gt",
+                "value": "0",
+                "valueType": "str"
+            }
+        ],
+        "x": 238,
+        "y": 211,
         "wires": [
             [
-                "568149d7.fddb88"
+                "4b7f1965.9d2f48"
             ]
+        ]
+    },
+    {
+        "id": "513ced38.3182a4",
+        "type": "catch",
+        "z": "f5cdc70a.d1345",
+        "name": "Catch no measure given",
+        "scope": [
+            "b200420d.453858"
+        ],
+        "x": 935,
+        "y": 441,
+        "wires": [
+            [
+                "1aabe407.0ce9ac"
+            ]
+        ]
+    },
+    {
+        "id": "1aabe407.0ce9ac",
+        "type": "template",
+        "z": "f5cdc70a.d1345",
+        "name": "No measure given",
+        "field": "error.message",
+        "fieldType": "msg",
+        "format": "text",
+        "syntax": "plain",
+        "template": "No measure given for the target plantation.",
+        "x": 1159.5,
+        "y": 441,
+        "wires": [
+            []
         ]
     }
 ]
