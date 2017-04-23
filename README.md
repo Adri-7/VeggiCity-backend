@@ -22,6 +22,10 @@ The server offers the following API endpoints:
 
 Returns the list of Jardins in database.
 
+#### Method
+
+GET
+
 #### Parameters
 
 None.
@@ -34,6 +38,10 @@ None.
 
 Returns informations about a Jardin.
 
+#### Method
+
+GET
+
 #### Parameters
 
 - `id`: The ID of the Jardin
@@ -41,3 +49,38 @@ Returns informations about a Jardin.
 #### Example
 
 `http://localhost:1880/api/app?method=getJardin&id=1`
+
+### `addMeasure`
+
+Allow sensors to add a new measure.
+
+#### Method
+
+POST
+
+#### Input
+
+- `plantation` (`number`) : The ID of the concerned plantation
+- `data` (`array`) : An array of the measures to add for this plantation, containing objects of the following structure:
+    - `measureType` (`string`) : the measure type, for example `temperature`, `moisture` or `luminosity`
+    - `value` (`number`) : the corresponding value, the unit depends on the measure type
+
+#### Example
+##### URL
+`http://localhost:1880/api/sensor?method=addMeasure`
+
+##### Body
+
+    {
+        "plantation": 13,
+        "data": [
+            {
+                "measureType": "temperature",
+                "value": 24.5
+            },
+            {
+                "measureType": "moisture",
+                "value": 67.6
+            }
+        ]
+    }
