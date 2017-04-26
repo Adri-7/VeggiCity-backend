@@ -61,9 +61,8 @@ POST
 #### Input
 
 - `plantation` (`number`) : The ID of the concerned plantation
-- `data` (`array`) : An array of the measures to add for this plantation, containing objects of the following structure:
-    - `measureType` (`string`) : the measure type, for example `temperature`, `moisture` or `luminosity`
-    - `value` (`number`) : the corresponding value, the unit depends on the measure type
+- `temperature` (`number`) : the temperature measure on the plantation
+- `moisture` (`number`) : the moisture measure on the plantation
 
 #### Example
 ##### URL
@@ -73,14 +72,6 @@ POST
 
     {
         "plantation": 13,
-        "data": [
-            {
-                "measureType": "temperature",
-                "value": 24.5
-            },
-            {
-                "measureType": "moisture",
-                "value": 67.6
-            }
-        ]
+        "temperature": 25.4,
+        "moisture": 69.5
     }
