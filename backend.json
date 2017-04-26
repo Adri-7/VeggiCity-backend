@@ -79,8 +79,8 @@
         "info": "",
         "in": [
             {
-                "x": 40,
-                "y": 105,
+                "x": 41,
+                "y": 96,
                 "wires": [
                     {
                         "id": "c8e006ee.497f98"
@@ -90,18 +90,18 @@
         ],
         "out": [
             {
-                "x": 1230,
-                "y": 107.75001525878906,
+                "x": 929,
+                "y": 441.75,
                 "wires": [
                     {
-                        "id": "e06ed683.3682f8",
+                        "id": "f931511d.4df85",
                         "port": 0
                     }
                 ]
             },
             {
-                "x": 1309,
-                "y": 374,
+                "x": 863,
+                "y": 647,
                 "wires": [
                     {
                         "id": "a461fffa.f50ae8",
@@ -112,7 +112,11 @@
                         "port": 0
                     },
                     {
-                        "id": "1aabe407.0ce9ac",
+                        "id": "c82b306.bc21e5",
+                        "port": 0
+                    },
+                    {
+                        "id": "72c9cd89.45279c",
                         "port": 0
                     }
                 ]
@@ -484,154 +488,40 @@
         "name": "Check measurement validity",
         "rules": [
             {
-                "property": "payload.data",
-                "propertyType": "msg",
-                "type": "type",
-                "value": "array"
-            },
-            {
                 "property": "payload.plantation",
                 "propertyType": "msg",
-                "type": "nnull"
-            }
-        ],
-        "x": 243,
-        "y": 154,
-        "wires": [
-            [
-                "b200420d.453858"
-            ]
-        ]
-    },
-    {
-        "id": "891c8560.55d1",
-        "type": "split",
-        "z": "f5cdc70a.d1345",
-        "name": "Register each measure",
-        "splt": "\\n",
-        "x": 813,
-        "y": 107,
-        "wires": [
-            [
-                "dde679be.bf36d"
-            ]
-        ]
-    },
-    {
-        "id": "4b7f1965.9d2f48",
-        "type": "change",
-        "z": "f5cdc70a.d1345",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "body",
-                "pt": "msg",
-                "to": "payload",
-                "tot": "msg"
+                "type": "type",
+                "value": "number"
             },
             {
-                "t": "move",
-                "p": "payload.data",
-                "pt": "msg",
-                "to": "payload",
-                "tot": "msg"
+                "property": "payload.temperature",
+                "propertyType": "msg",
+                "type": "type",
+                "value": "number"
+            },
+            {
+                "property": "payload.moisture",
+                "propertyType": "msg",
+                "type": "type",
+                "value": "number"
             }
         ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 552,
-        "y": 108,
+        "x": 572,
+        "y": 95,
         "wires": [
             [
-                "891c8560.55d1"
+                "e4bd9c0e.2fe0d"
             ]
-        ]
-    },
-    {
-        "id": "e06ed683.3682f8",
-        "type": "join",
-        "z": "f5cdc70a.d1345",
-        "name": "",
-        "mode": "auto",
-        "build": "string",
-        "property": "payload",
-        "propertyType": "msg",
-        "key": "topic",
-        "joiner": "\\n",
-        "timeout": "",
-        "count": "",
-        "x": 1080,
-        "y": 107.5,
-        "wires": [
-            []
         ]
     },
     {
         "id": "f128c48c.176f9",
         "type": "comment",
         "z": "f5cdc70a.d1345",
-        "name": "Iterate over each measure given",
+        "name": "Check the existence of the plantation",
         "info": "",
-        "x": 832.5,
-        "y": 31.25,
-        "wires": []
-    },
-    {
-        "id": "219a9093.205e48",
-        "type": "debug",
-        "z": "f5cdc70a.d1345",
-        "name": "Log measure",
-        "active": true,
-        "console": "false",
-        "complete": "payload",
-        "x": 932.5,
-        "y": 267,
-        "wires": []
-    },
-    {
-        "id": "dde679be.bf36d",
-        "type": "assert",
-        "z": "f5cdc70a.d1345",
-        "name": "Check measure object validity",
-        "rules": [
-            {
-                "property": "payload",
-                "propertyType": "msg",
-                "type": "type",
-                "value": "object"
-            },
-            {
-                "property": "payload.measureType",
-                "propertyType": "msg",
-                "type": "nnull"
-            },
-            {
-                "property": "payload.value",
-                "propertyType": "msg",
-                "type": "nnull"
-            }
-        ],
-        "x": 586.5,
-        "y": 268,
-        "wires": [
-            [
-                "219a9093.205e48",
-                "e06ed683.3682f8"
-            ]
-        ]
-    },
-    {
-        "id": "b5530fd1.4a08b",
-        "type": "comment",
-        "z": "f5cdc70a.d1345",
-        "name": "Check validity of the measure object",
-        "info": "Each measure must match the following format:\n\n    {\n        measureType: \"temperature\",\n        value: 26.5\n    }",
-        "x": 594.5,
-        "y": 329,
+        "x": 172.5,
+        "y": 183.25,
         "wires": []
     },
     {
@@ -640,8 +530,8 @@
         "z": "f5cdc70a.d1345",
         "name": "Error output",
         "info": "",
-        "x": 1413.5,
-        "y": 371,
+        "x": 967.5,
+        "y": 644,
         "wires": []
     },
     {
@@ -653,8 +543,8 @@
             "dde679be.bf36d",
             "dc679df4.785a9"
         ],
-        "x": 952.5,
-        "y": 356,
+        "x": 506.5,
+        "y": 629,
         "wires": [
             [
                 "a461fffa.f50ae8"
@@ -719,8 +609,8 @@
         "scope": [
             "c8e006ee.497f98"
         ],
-        "x": 944.5,
-        "y": 397,
+        "x": 498.5,
+        "y": 670,
         "wires": [
             [
                 "838380de.374e6"
@@ -736,9 +626,9 @@
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "plain",
-        "template": "Invalid input: some required fields have been omitted.",
-        "x": 1140,
-        "y": 355,
+        "template": "Invalid input: some required fields have been omitted or are not of type 'number'.",
+        "x": 694,
+        "y": 628,
         "wires": [
             []
         ]
@@ -753,64 +643,237 @@
         "format": "text",
         "syntax": "plain",
         "template": "Unknown API method.",
-        "x": 1151,
-        "y": 399,
+        "x": 705,
+        "y": 672,
         "wires": [
             []
         ]
     },
     {
-        "id": "b200420d.453858",
-        "type": "assert",
+        "id": "2a3f77ab.ceb4a8",
+        "type": "mysql",
         "z": "f5cdc70a.d1345",
-        "name": "Ensure there is at least a measure",
+        "mydb": "c0e93a6b.6b218",
+        "name": "Look for a registered plantation",
+        "x": 690.5,
+        "y": 234,
+        "wires": [
+            [
+                "e0e1217d.d42a"
+            ]
+        ]
+    },
+    {
+        "id": "e4bd9c0e.2fe0d",
+        "type": "change",
+        "z": "f5cdc70a.d1345",
+        "name": "Save data",
         "rules": [
             {
-                "property": "payload.data.length",
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "data",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 243.5,
+        "y": 233,
+        "wires": [
+            [
+                "a31046e7.399c58"
+            ]
+        ]
+    },
+    {
+        "id": "a31046e7.399c58",
+        "type": "template",
+        "z": "f5cdc70a.d1345",
+        "name": "Build request",
+        "field": "topic",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "SELECT COUNT(IdPlantation) as Found\nFROM Plantation\nWHERE IdPlantation = {{data.plantation}};",
+        "x": 444.5,
+        "y": 235,
+        "wires": [
+            [
+                "2a3f77ab.ceb4a8"
+            ]
+        ]
+    },
+    {
+        "id": "e0e1217d.d42a",
+        "type": "assert",
+        "z": "f5cdc70a.d1345",
+        "name": "Ensure that the plantation exists",
+        "rules": [
+            {
+                "property": "payload[0].Found",
                 "propertyType": "msg",
-                "type": "gt",
-                "value": "0",
+                "type": "eq",
+                "value": "1",
                 "valueType": "str"
             }
         ],
-        "x": 238,
-        "y": 211,
+        "x": 984.5,
+        "y": 236,
         "wires": [
             [
-                "4b7f1965.9d2f48"
+                "5d39668c.4b95b8"
             ]
         ]
     },
     {
-        "id": "513ced38.3182a4",
-        "type": "catch",
+        "id": "4d195b1a.28db44",
+        "type": "comment",
         "z": "f5cdc70a.d1345",
-        "name": "Catch no measure given",
-        "scope": [
-            "b200420d.453858"
-        ],
-        "x": 935,
-        "y": 441,
-        "wires": [
-            [
-                "1aabe407.0ce9ac"
-            ]
-        ]
+        "name": "Check request validity",
+        "info": "",
+        "x": 124.5,
+        "y": 30,
+        "wires": []
     },
     {
-        "id": "1aabe407.0ce9ac",
+        "id": "f96ea93.08192d8",
+        "type": "comment",
+        "z": "f5cdc70a.d1345",
+        "name": "Insert the data into the database",
+        "info": "",
+        "x": 156.5,
+        "y": 369,
+        "wires": []
+    },
+    {
+        "id": "5d39668c.4b95b8",
         "type": "template",
         "z": "f5cdc70a.d1345",
-        "name": "No measure given",
+        "name": "Build insert query",
+        "field": "topic",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "INSERT INTO Mesure (Temperature, Humidite, IdPlantation)\nVALUES ({{data.temperature}}, {{data.moisture}}, {{data.plantation}});",
+        "x": 259.5,
+        "y": 443,
+        "wires": [
+            [
+                "8ed3d032.57b34",
+                "7d6701df.21c7c8"
+            ]
+        ]
+    },
+    {
+        "id": "ea54cc60.a2a608",
+        "type": "catch",
+        "z": "f5cdc70a.d1345",
+        "name": "Catch DB error",
+        "scope": [
+            "8ed3d032.57b34",
+            "2a3f77ab.ceb4a8"
+        ],
+        "x": 518.5,
+        "y": 717,
+        "wires": [
+            [
+                "c82b306.bc21e5"
+            ]
+        ]
+    },
+    {
+        "id": "8ed3d032.57b34",
+        "type": "mysql",
+        "z": "f5cdc70a.d1345",
+        "mydb": "c0e93a6b.6b218",
+        "name": "Insert the new data",
+        "x": 502.5,
+        "y": 444,
+        "wires": [
+            [
+                "f931511d.4df85"
+            ]
+        ]
+    },
+    {
+        "id": "c82b306.bc21e5",
+        "type": "template",
+        "z": "f5cdc70a.d1345",
+        "name": "DB error",
         "field": "error.message",
         "fieldType": "msg",
         "format": "text",
         "syntax": "plain",
-        "template": "No measure given for the target plantation.",
-        "x": 1159.5,
-        "y": 441,
+        "template": "Database access error.",
+        "x": 685,
+        "y": 716,
         "wires": [
             []
         ]
+    },
+    {
+        "id": "f931511d.4df85",
+        "type": "template",
+        "z": "f5cdc70a.d1345",
+        "name": "Build success response",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "json",
+        "syntax": "plain",
+        "template": "{\n    \"status\": \"success\"\n}",
+        "x": 736.5,
+        "y": 445,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5dc9ce16.93b58",
+        "type": "catch",
+        "z": "f5cdc70a.d1345",
+        "name": "Plantation does not exist",
+        "scope": [
+            "e0e1217d.d42a"
+        ],
+        "x": 489.5,
+        "y": 761,
+        "wires": [
+            [
+                "72c9cd89.45279c"
+            ]
+        ]
+    },
+    {
+        "id": "72c9cd89.45279c",
+        "type": "template",
+        "z": "f5cdc70a.d1345",
+        "name": "Unknown plantation",
+        "field": "error.message",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "plain",
+        "template": "Plantation does not exist.",
+        "x": 724,
+        "y": 760,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7d6701df.21c7c8",
+        "type": "debug",
+        "z": "f5cdc70a.d1345",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "topic",
+        "x": 461.5,
+        "y": 513,
+        "wires": []
     }
 ]
