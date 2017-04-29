@@ -18,6 +18,13 @@ You can now access the server's flow at http://localhost:1880.
 
 The server offers the following API endpoints:
 
+- Application endpoints
+    * [`getJardins`](#getjardins)
+    * [`getJardin`](#getjardin)
+    * [`getPlantation`](#getplantation)
+- Sensors endpoints
+    * [`addMeasure`](#addmeasure)
+
 ### `getJardins`
 
 Returns the list of Jardins in database.
