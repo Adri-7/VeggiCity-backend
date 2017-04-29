@@ -79,7 +79,7 @@
     {
         "id": "f5cdc70a.d1345",
         "type": "subflow",
-        "name": "Post sensor data",
+        "name": "addMeasure",
         "info": "",
         "in": [
             {
@@ -171,6 +171,65 @@
         ]
     },
     {
+        "id": "91bb539c.8c2b98",
+        "type": "subflow",
+        "name": "addPlantation",
+        "info": "",
+        "in": [
+            {
+                "x": 128,
+                "y": 159,
+                "wires": [
+                    {
+                        "id": "5f9ff481.be1e0c"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 1219,
+                "y": 607,
+                "wires": [
+                    {
+                        "id": "b471f9c.ad13588",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 999,
+                "y": 876,
+                "wires": [
+                    {
+                        "id": "ee9a2d27.c7cf48",
+                        "port": 0
+                    },
+                    {
+                        "id": "2d51b011.aada98",
+                        "port": 0
+                    },
+                    {
+                        "id": "13b5b784.85bf3",
+                        "port": 0
+                    },
+                    {
+                        "id": "ee2a8f6b.f8825",
+                        "port": 0
+                    },
+                    {
+                        "id": "9631ea9b.a38db",
+                        "port": 0
+                    },
+                    {
+                        "id": "1db8b31d.fe898d",
+                        "port": 0
+                    }
+                ]
+            }
+        ]
+    },
+    {
         "id": "c0e93a6b.6b218",
         "type": "MySQLdatabase",
         "z": "",
@@ -183,12 +242,12 @@
         "id": "17557121.6b5617",
         "type": "http in",
         "z": "cf757416.97ca88",
-        "name": "App API Server",
+        "name": "App API Server (GET)",
         "url": "/api/app",
         "method": "get",
         "swaggerDoc": "",
-        "x": 195.5,
-        "y": 325,
+        "x": 214.5,
+        "y": 330,
         "wires": [
             [
                 "a7695812.f1ac8"
@@ -203,8 +262,8 @@
         "url": "/api/sensor",
         "method": "post",
         "swaggerDoc": "",
-        "x": 182.5,
-        "y": 89,
+        "x": 199.5,
+        "y": 90,
         "wires": [
             [
                 "caa219fc.8a0be"
@@ -230,11 +289,11 @@
         "format": "text",
         "syntax": "plain",
         "template": "Unknown method.",
-        "x": 780.8333740234375,
-        "y": 449.6666259765625,
+        "x": 775.8333740234375,
+        "y": 409.6666259765625,
         "wires": [
             [
-                "568149d7.fddb88"
+                "3d054af9.9d1426"
             ]
         ]
     },
@@ -615,7 +674,9 @@
         "links": [
             "617e96cc.a19c5",
             "b6c00aca.52478",
-            "eca2e9c.44c4118"
+            "eca2e9c.44c4118",
+            "cbc727b4.4700a",
+            "3d054af9.9d1426"
         ],
         "x": 887.5,
         "y": 556,
@@ -1130,6 +1191,602 @@
         "template": "ID parameter must be numeric.",
         "x": 493.851806640625,
         "y": 277.18511962890625,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "65b9efa2.89d6d8",
+        "type": "http in",
+        "z": "cf757416.97ca88",
+        "name": "App API Server (POST)",
+        "url": "/api/app",
+        "method": "post",
+        "swaggerDoc": "",
+        "x": 213,
+        "y": 470,
+        "wires": [
+            [
+                "32d71a1.bcac766"
+            ]
+        ]
+    },
+    {
+        "id": "32d71a1.bcac766",
+        "type": "subflow:91bb539c.8c2b98",
+        "z": "cf757416.97ca88",
+        "x": 765.5,
+        "y": 468,
+        "wires": [
+            [
+                "a6cb2200.99618"
+            ],
+            [
+                "cbc727b4.4700a"
+            ]
+        ]
+    },
+    {
+        "id": "3751917a.301c36",
+        "type": "assert",
+        "z": "91bb539c.8c2b98",
+        "name": "Check plantation data",
+        "rules": [
+            {
+                "property": "payload.name",
+                "propertyType": "msg",
+                "type": "type",
+                "value": "string"
+            },
+            {
+                "property": "payload.date",
+                "propertyType": "msg",
+                "type": "type",
+                "value": "string"
+            },
+            {
+                "property": "payload.jardin",
+                "propertyType": "msg",
+                "type": "type",
+                "value": "number"
+            },
+            {
+                "property": "payload.species",
+                "propertyType": "msg",
+                "type": "type",
+                "value": "number"
+            }
+        ],
+        "x": 609.5,
+        "y": 159,
+        "wires": [
+            [
+                "58af2cdc.ef4b14"
+            ]
+        ]
+    },
+    {
+        "id": "2bc05167.03ac2e",
+        "type": "comment",
+        "z": "91bb539c.8c2b98",
+        "name": "Check the existence of the \"jardin\"",
+        "info": "",
+        "x": 227,
+        "y": 248.25,
+        "wires": []
+    },
+    {
+        "id": "ba9c7b94.b8b638",
+        "type": "comment",
+        "z": "91bb539c.8c2b98",
+        "name": "Error output",
+        "info": "",
+        "x": 1042,
+        "y": 821,
+        "wires": []
+    },
+    {
+        "id": "60fae964.5f7bf",
+        "type": "catch",
+        "z": "91bb539c.8c2b98",
+        "name": "Catch invalid input",
+        "scope": [
+            "dde679be.bf36d",
+            "3751917a.301c36"
+        ],
+        "x": 578,
+        "y": 783,
+        "wires": [
+            [
+                "ee9a2d27.c7cf48"
+            ]
+        ]
+    },
+    {
+        "id": "5f9ff481.be1e0c",
+        "type": "assert",
+        "z": "91bb539c.8c2b98",
+        "name": "Check API method",
+        "rules": [
+            {
+                "property": "req.query.method",
+                "propertyType": "msg",
+                "type": "eq",
+                "value": "addPlantation",
+                "valueType": "str"
+            }
+        ],
+        "x": 306,
+        "y": 159,
+        "wires": [
+            [
+                "3751917a.301c36"
+            ]
+        ]
+    },
+    {
+        "id": "8ef3941e.75d19",
+        "type": "catch",
+        "z": "91bb539c.8c2b98",
+        "name": "Catch invalid method",
+        "scope": [
+            "5f9ff481.be1e0c"
+        ],
+        "x": 570,
+        "y": 824,
+        "wires": [
+            [
+                "2d51b011.aada98"
+            ]
+        ]
+    },
+    {
+        "id": "ee9a2d27.c7cf48",
+        "type": "template",
+        "z": "91bb539c.8c2b98",
+        "name": "Invalid input",
+        "field": "error.message",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "plain",
+        "template": "Invalid input: some required fields have been omitted or are not of type 'number'.",
+        "x": 765.5,
+        "y": 782,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2d51b011.aada98",
+        "type": "template",
+        "z": "91bb539c.8c2b98",
+        "name": "Invalid method",
+        "field": "error.message",
+        "fieldType": "msg",
+        "format": "text",
+        "syntax": "plain",
+        "template": "Unknown API method.",
+        "x": 776.5,
+        "y": 826,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b5fca8f.c85c3d8",
+        "type": "mysql",
+        "z": "91bb539c.8c2b98",
+        "mydb": "c0e93a6b.6b218",
+        "name": "Look for a registered Jardin",
+        "x": 745,
+        "y": 299,
+        "wires": [
+            [
+                "95050a68.516b38"
+            ]
+        ]
+    },
+    {
+        "id": "d60ddd4a.0c7988",
+        "type": "change",
+        "z": "91bb539c.8c2b98",
+        "name": "Save data",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "data",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 308,
+        "y": 298,
+        "wires": [
+            [
+                "1153d2b3.b22a25"
+            ]
+        ]
+    },
+    {
+        "id": "1153d2b3.b22a25",
+        "type": "template",
+        "z": "91bb539c.8c2b98",
+        "name": "Build request",
+        "field": "topic",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "SELECT COUNT(IdJardin) as Found\nFROM Jardin\nWHERE IdJardin = {{data.jardin}};",
+        "x": 509,
+        "y": 300,
+        "wires": [
+            [
+                "b5fca8f.c85c3d8"
+            ]
+        ]
+    },
+    {
+        "id": "95050a68.516b38",
+        "type": "assert",
+        "z": "91bb539c.8c2b98",
+        "name": "Ensure that the jardin exists",
+        "rules": [
+            {
+                "property": "payload[0].Found",
+                "propertyType": "msg",
+                "type": "eq",
+                "value": "1",
+                "valueType": "str"
+            }
+        ],
+        "x": 1052,
+        "y": 298,
+        "wires": [
+            [
+                "82ef108.c314cf"
+            ]
+        ]
+    },
+    {
+        "id": "1eee29b7.b55abe",
+        "type": "comment",
+        "z": "91bb539c.8c2b98",
+        "name": "Check request validity",
+        "info": "",
+        "x": 189,
+        "y": 95,
+        "wires": []
+    },
+    {
+        "id": "579670db.4b88c8",
+        "type": "comment",
+        "z": "91bb539c.8c2b98",
+        "name": "Insert the data into the database",
+        "info": "",
+        "x": 215,
+        "y": 545,
+        "wires": []
+    },
+    {
+        "id": "1ec8f41e.b3519c",
+        "type": "template",
+        "z": "91bb539c.8c2b98",
+        "name": "Build insert query",
+        "field": "topic",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "INSERT INTO Plantation (Nom, DatePlantation, IdJardin, IdEspece)\nVALUES (\"{{{data.name}}}\", \"{{{data.date}}}\", {{{data.jardin}}}, {{{data.species}}});",
+        "x": 560,
+        "y": 605,
+        "wires": [
+            [
+                "6819daba.a6bc8c",
+                "e601e97c.28a39"
+            ]
+        ]
+    },
+    {
+        "id": "36acc43f.46d1dc",
+        "type": "catch",
+        "z": "91bb539c.8c2b98",
+        "name": "Catch DB error",
+        "scope": [
+            "6819daba.a6bc8c",
+            "b5fca8f.c85c3d8",
+            "c9232d60.a50b3"
+        ],
+        "x": 590,
+        "y": 871,
+        "wires": [
+            [
+                "13b5b784.85bf3"
+            ]
+        ]
+    },
+    {
+        "id": "6819daba.a6bc8c",
+        "type": "mysql",
+        "z": "91bb539c.8c2b98",
+        "mydb": "c0e93a6b.6b218",
+        "name": "Insert the new data",
+        "x": 803,
+        "y": 606,
+        "wires": [
+            [
+                "b471f9c.ad13588"
+            ]
+        ]
+    },
+    {
+        "id": "13b5b784.85bf3",
+        "type": "template",
+        "z": "91bb539c.8c2b98",
+        "name": "DB error",
+        "field": "error.message",
+        "fieldType": "msg",
+        "format": "text",
+        "syntax": "plain",
+        "template": "Database access error.",
+        "x": 756.5,
+        "y": 870,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b471f9c.ad13588",
+        "type": "template",
+        "z": "91bb539c.8c2b98",
+        "name": "Build success response",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "json",
+        "syntax": "plain",
+        "template": "{\n    \"status\": \"success\"\n}",
+        "x": 1037,
+        "y": 607,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "29747f38.7cc5c",
+        "type": "catch",
+        "z": "91bb539c.8c2b98",
+        "name": "Jardin does not exist",
+        "scope": [
+            "95050a68.516b38"
+        ],
+        "x": 572,
+        "y": 915,
+        "wires": [
+            [
+                "ee2a8f6b.f8825"
+            ]
+        ]
+    },
+    {
+        "id": "ee2a8f6b.f8825",
+        "type": "template",
+        "z": "91bb539c.8c2b98",
+        "name": "Unknown Jardin",
+        "field": "error.message",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "plain",
+        "template": "Jardin ID does not exist.",
+        "x": 775.5,
+        "y": 914,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e601e97c.28a39",
+        "type": "debug",
+        "z": "91bb539c.8c2b98",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "topic",
+        "x": 762,
+        "y": 675,
+        "wires": []
+    },
+    {
+        "id": "a7e93fc2.1457a8",
+        "type": "comment",
+        "z": "91bb539c.8c2b98",
+        "name": "Check the existence of the species",
+        "info": "",
+        "x": 224,
+        "y": 372,
+        "wires": []
+    },
+    {
+        "id": "c9232d60.a50b3",
+        "type": "mysql",
+        "z": "91bb539c.8c2b98",
+        "mydb": "c0e93a6b.6b218",
+        "name": "Look for a registered species",
+        "x": 554,
+        "y": 424.75,
+        "wires": [
+            [
+                "beaa99c0.e9f8b"
+            ]
+        ]
+    },
+    {
+        "id": "82ef108.c314cf",
+        "type": "template",
+        "z": "91bb539c.8c2b98",
+        "name": "Build request",
+        "field": "topic",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "SELECT COUNT(IdEspece) as Found\nFROM Espece\nWHERE IdEspece = {{data.species}};",
+        "x": 308,
+        "y": 425.75,
+        "wires": [
+            [
+                "c9232d60.a50b3"
+            ]
+        ]
+    },
+    {
+        "id": "beaa99c0.e9f8b",
+        "type": "assert",
+        "z": "91bb539c.8c2b98",
+        "name": "Ensure that the species exists",
+        "rules": [
+            {
+                "property": "payload[0].Found",
+                "propertyType": "msg",
+                "type": "eq",
+                "value": "1",
+                "valueType": "str"
+            }
+        ],
+        "x": 861,
+        "y": 423.75,
+        "wires": [
+            [
+                "84a3c646.cce5c8"
+            ]
+        ]
+    },
+    {
+        "id": "603d82b1.2ea76c",
+        "type": "catch",
+        "z": "91bb539c.8c2b98",
+        "name": "Species does not exist",
+        "scope": [
+            "beaa99c0.e9f8b"
+        ],
+        "x": 573,
+        "y": 959,
+        "wires": [
+            [
+                "9631ea9b.a38db"
+            ]
+        ]
+    },
+    {
+        "id": "9631ea9b.a38db",
+        "type": "template",
+        "z": "91bb539c.8c2b98",
+        "name": "Unknown species",
+        "field": "error.message",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "plain",
+        "template": "Species ID does not exist.",
+        "x": 783,
+        "y": 959,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "84a3c646.cce5c8",
+        "type": "function",
+        "z": "91bb539c.8c2b98",
+        "name": "Escape fields",
+        "func": "function mysql_real_escape_string (str) {\n    return str.replace(/[\\0\\x08\\x09\\x1a\\n\\r\"'\\\\\\%]/g, function (char) {\n        switch (char) {\n            case \"\\x08\":\n                return \"\\\\b\";\n            case \"\\x09\":\n                return \"\\\\t\";\n            case \"\\x1a\":\n                return \"\\\\z\";\n            case \"\\n\":\n                return \"\\\\n\";\n            case \"\\r\":\n                return \"\\\\r\";\n            case \"\\\"\":\n            case \"'\":\n            case \"\\\\\":\n            case \"%\":\n                return \"\\\\\"+char; // prepends a backslash to backslash, percent,\n                                  // and double/single quotes\n        }\n    });\n}\n\nmsg.data.name = mysql_real_escape_string(msg.data.name);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 310.5,
+        "y": 605,
+        "wires": [
+            [
+                "1ec8f41e.b3519c"
+            ]
+        ]
+    },
+    {
+        "id": "cbc727b4.4700a",
+        "type": "link out",
+        "z": "cf757416.97ca88",
+        "name": "addMeasure error output",
+        "links": [
+            "5f0ab50a.1ba7e4"
+        ],
+        "x": 892,
+        "y": 475,
+        "wires": []
+    },
+    {
+        "id": "3d054af9.9d1426",
+        "type": "link out",
+        "z": "cf757416.97ca88",
+        "name": "addMeasure error output",
+        "links": [
+            "5f0ab50a.1ba7e4"
+        ],
+        "x": 887,
+        "y": 409,
+        "wires": []
+    },
+    {
+        "id": "58af2cdc.ef4b14",
+        "type": "assert",
+        "z": "91bb539c.8c2b98",
+        "name": "Check date",
+        "rules": [
+            {
+                "property": "payload.date",
+                "propertyType": "msg",
+                "type": "regex",
+                "value": "^\\d\\d\\d\\d-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$",
+                "valueType": "str",
+                "case": false
+            }
+        ],
+        "x": 832,
+        "y": 159,
+        "wires": [
+            [
+                "d60ddd4a.0c7988"
+            ]
+        ]
+    },
+    {
+        "id": "612da98a.2d9dc",
+        "type": "catch",
+        "z": "91bb539c.8c2b98",
+        "name": "Catch invalid date",
+        "scope": [
+            "58af2cdc.ef4b14"
+        ],
+        "x": 584,
+        "y": 1007,
+        "wires": [
+            [
+                "1db8b31d.fe898d"
+            ]
+        ]
+    },
+    {
+        "id": "1db8b31d.fe898d",
+        "type": "template",
+        "z": "91bb539c.8c2b98",
+        "name": "Wrong date",
+        "field": "error.message",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "plain",
+        "template": "Date must follow the format YYYY-MM-DD.",
+        "x": 764,
+        "y": 1007,
         "wires": [
             []
         ]
