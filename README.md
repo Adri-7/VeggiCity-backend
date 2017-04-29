@@ -22,6 +22,7 @@ The server offers the following API endpoints:
     * [`getJardins`](#getjardins)
     * [`getJardin`](#getjardin)
     * [`getPlantation`](#getplantation)
+    * [`addPlantation`](#addplantation)
 - Sensors endpoints
     * [`addMeasure`](#addmeasure)
 
@@ -72,6 +73,34 @@ GET
 #### Example
 
 `http://localhost:1880/api/app?method=getPlantation&id=1`
+
+### `addPlantation`
+
+Allow to register a new plantation.
+
+#### Method
+
+POST
+
+#### Input
+
+- `name` (`string`) : The name to give to this plantation
+- `date` (`string`) : The date of plantation, following the format YYYY-MM-DD
+- `jardin` (`number`) : the ID of the jardin containing this plantation
+- `species` (`number`) : the ID of this plantation species
+
+#### Example
+##### URL
+`http://localhost:1880/api/app?method=addPlantation`
+
+##### Body
+
+    {
+        "name": "Laitue de mamie",
+        "species": 2,
+        "jardin": 3,
+        "date": "2017-04-29"
+    }
 
 ### `addMeasure`
 
