@@ -32,11 +32,15 @@
                 ]
             },
             {
-                "x": 889,
+                "x": 926,
                 "y": 224,
                 "wires": [
                     {
                         "id": "9f1a99bf.777d5",
+                        "port": 0
+                    },
+                    {
+                        "id": "678d577.6d055a8",
                         "port": 0
                     }
                 ]
@@ -117,6 +121,49 @@
                     },
                     {
                         "id": "72c9cd89.45279c",
+                        "port": 0
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "62b88822.e0ba48",
+        "type": "subflow",
+        "name": "getPlantation",
+        "info": "",
+        "in": [
+            {
+                "x": 91,
+                "y": 160,
+                "wires": [
+                    {
+                        "id": "166e797f.b7f407"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 1089,
+                "y": 156,
+                "wires": [
+                    {
+                        "id": "e4f1b4e5.b6d6e",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 668,
+                "y": 251,
+                "wires": [
+                    {
+                        "id": "51168cf2.bff47c",
+                        "port": 0
+                    },
+                    {
+                        "id": "80f6a353.a09678",
                         "port": 0
                     }
                 ]
@@ -210,11 +257,16 @@
                 "vt": "str"
             },
             {
+                "t": "eq",
+                "v": "getPlantation",
+                "vt": "str"
+            },
+            {
                 "t": "else"
             }
         ],
         "checkall": "false",
-        "outputs": 3,
+        "outputs": 4,
         "x": 493.5,
         "y": 330,
         "wires": [
@@ -223,6 +275,9 @@
             ],
             [
                 "d9ceda21.6b7e68"
+            ],
+            [
+                "e764a94d.bb9be"
             ],
             [
                 "284a0285.11f016"
@@ -309,14 +364,14 @@
         "id": "9f1a99bf.777d5",
         "type": "template",
         "z": "c0c690e.17165f",
-        "name": "getJardin",
+        "name": "Missing parameter",
         "field": "error.message",
         "fieldType": "msg",
         "format": "text",
         "syntax": "plain",
         "template": "ID parameter is missing.",
-        "x": 759.148193359375,
-        "y": 223.81488037109375,
+        "x": 776.148193359375,
+        "y": 224.81488037109375,
         "wires": [
             []
         ]
@@ -325,14 +380,15 @@
         "id": "d9ceda21.6b7e68",
         "type": "subflow:c0c690e.17165f",
         "z": "cf757416.97ca88",
-        "x": 773.8888888888889,
-        "y": 326.6666666666667,
+        "name": "",
+        "x": 758.888916015625,
+        "y": 277.6666564941406,
         "wires": [
             [
                 "a6cb2200.99618"
             ],
             [
-                "568149d7.fddb88"
+                "b6c00aca.52478"
             ]
         ]
     },
@@ -557,7 +613,9 @@
         "z": "cf757416.97ca88",
         "name": "",
         "links": [
-            "617e96cc.a19c5"
+            "617e96cc.a19c5",
+            "b6c00aca.52478",
+            "eca2e9c.44c4118"
         ],
         "x": 887.5,
         "y": 556,
@@ -875,5 +933,205 @@
         "x": 461.5,
         "y": 513,
         "wires": []
+    },
+    {
+        "id": "b6c00aca.52478",
+        "type": "link out",
+        "z": "cf757416.97ca88",
+        "name": "addMeasure error output",
+        "links": [
+            "5f0ab50a.1ba7e4"
+        ],
+        "x": 868,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "e764a94d.bb9be",
+        "type": "subflow:62b88822.e0ba48",
+        "z": "cf757416.97ca88",
+        "x": 767.5,
+        "y": 341,
+        "wires": [
+            [
+                "a6cb2200.99618"
+            ],
+            [
+                "eca2e9c.44c4118"
+            ]
+        ]
+    },
+    {
+        "id": "eca2e9c.44c4118",
+        "type": "link out",
+        "z": "cf757416.97ca88",
+        "name": "addMeasure error output",
+        "links": [
+            "5f0ab50a.1ba7e4"
+        ],
+        "x": 882,
+        "y": 358,
+        "wires": []
+    },
+    {
+        "id": "65295668.c07b08",
+        "type": "template",
+        "z": "62b88822.e0ba48",
+        "name": "Build getPlantation request",
+        "field": "topic",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "SELECT *\nFROM Plantation\nWHERE IdPlantation = '{{{payload.id}}}';",
+        "x": 728.5368957519531,
+        "y": 156,
+        "wires": [
+            [
+                "e4f1b4e5.b6d6e"
+            ]
+        ]
+    },
+    {
+        "id": "e4f1b4e5.b6d6e",
+        "type": "mysql",
+        "z": "62b88822.e0ba48",
+        "mydb": "c0e93a6b.6b218",
+        "name": "",
+        "x": 953.648193359375,
+        "y": 156.11117553710938,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "166e797f.b7f407",
+        "type": "switch",
+        "z": "62b88822.e0ba48",
+        "name": "Plantation ID",
+        "property": "payload.id",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nnull"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "outputs": 2,
+        "x": 223,
+        "y": 160.44444274902344,
+        "wires": [
+            [
+                "4af9db2b.ca1e4c"
+            ],
+            [
+                "80f6a353.a09678"
+            ]
+        ]
+    },
+    {
+        "id": "4af9db2b.ca1e4c",
+        "type": "assert",
+        "z": "62b88822.e0ba48",
+        "name": "Check parameters",
+        "rules": [
+            {
+                "property": "payload.id",
+                "propertyType": "msg",
+                "type": "regex",
+                "value": "\\d+",
+                "valueType": "str",
+                "case": false
+            }
+        ],
+        "x": 478.20379638671875,
+        "y": 155.44448852539062,
+        "wires": [
+            [
+                "65295668.c07b08"
+            ]
+        ]
+    },
+    {
+        "id": "c98f5cd3.dacb98",
+        "type": "catch",
+        "z": "c0c690e.17165f",
+        "name": "Catch wrong param",
+        "scope": [
+            "f4e04fe9.a5d898"
+        ],
+        "x": 561.5,
+        "y": 272,
+        "wires": [
+            [
+                "678d577.6d055a8"
+            ]
+        ]
+    },
+    {
+        "id": "678d577.6d055a8",
+        "type": "template",
+        "z": "c0c690e.17165f",
+        "name": "Invalid parameter",
+        "field": "error.message",
+        "fieldType": "msg",
+        "format": "text",
+        "syntax": "plain",
+        "template": "ID parameter must be numeric.",
+        "x": 777,
+        "y": 272,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "80f6a353.a09678",
+        "type": "template",
+        "z": "62b88822.e0ba48",
+        "name": "Missing parameter",
+        "field": "error.message",
+        "fieldType": "msg",
+        "format": "text",
+        "syntax": "plain",
+        "template": "ID parameter is missing.",
+        "x": 493,
+        "y": 230,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "86010c90.83d338",
+        "type": "catch",
+        "z": "62b88822.e0ba48",
+        "name": "Catch wrong param",
+        "scope": [
+            "4af9db2b.ca1e4c"
+        ],
+        "x": 278.351806640625,
+        "y": 277.18511962890625,
+        "wires": [
+            [
+                "51168cf2.bff47c"
+            ]
+        ]
+    },
+    {
+        "id": "51168cf2.bff47c",
+        "type": "template",
+        "z": "62b88822.e0ba48",
+        "name": "Invalid parameter",
+        "field": "error.message",
+        "fieldType": "msg",
+        "format": "text",
+        "syntax": "plain",
+        "template": "ID parameter must be numeric.",
+        "x": 493.851806640625,
+        "y": 277.18511962890625,
+        "wires": [
+            []
+        ]
     }
 ]
