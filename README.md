@@ -50,6 +50,22 @@ GET
 
 `http://localhost:1880/api/app?method=getJardin&id=1`
 
+### `getPlantation`
+
+Returns informations about a Plantation.
+
+#### Method
+
+GET
+
+#### Parameters
+
+- `id`: The ID of the Plantation
+
+#### Example
+
+`http://localhost:1880/api/app?method=getPlantation&id=1`
+
 ### `addMeasure`
 
 Allow sensors to add a new measure.
