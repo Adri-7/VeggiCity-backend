@@ -1482,7 +1482,7 @@
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": "INSERT INTO Plantation (Nom, DatePlantation, IdJardin, IdEspece)\nVALUES (\"{{{data.name}}}\", \"{{{data.date}}}\", {{{data.jardin}}}, {{{data.species}}});",
+        "template": "INSERT INTO Plantation (Nom, DatePlantation, IdJardin, IdEspece)\nVALUES (?, ?, ?, ?);",
         "x": 560,
         "y": 605,
         "wires": [
@@ -1660,7 +1660,7 @@
         "y": 423.75,
         "wires": [
             [
-                "84a3c646.cce5c8"
+                "3014984e.0911e"
             ]
         ]
     },
@@ -1694,22 +1694,6 @@
         "y": 959,
         "wires": [
             []
-        ]
-    },
-    {
-        "id": "84a3c646.cce5c8",
-        "type": "function",
-        "z": "91bb539c.8c2b98",
-        "name": "Escape fields",
-        "func": "function mysql_real_escape_string (str) {\n    return str.replace(/[\\0\\x08\\x09\\x1a\\n\\r\"'\\\\\\%]/g, function (char) {\n        switch (char) {\n            case \"\\x08\":\n                return \"\\\\b\";\n            case \"\\x09\":\n                return \"\\\\t\";\n            case \"\\x1a\":\n                return \"\\\\z\";\n            case \"\\n\":\n                return \"\\\\n\";\n            case \"\\r\":\n                return \"\\\\r\";\n            case \"\\\"\":\n            case \"'\":\n            case \"\\\\\":\n            case \"%\":\n                return \"\\\\\"+char; // prepends a backslash to backslash, percent,\n                                  // and double/single quotes\n        }\n    });\n}\n\nmsg.data.name = mysql_real_escape_string(msg.data.name);\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 310.5,
-        "y": 605,
-        "wires": [
-            [
-                "1ec8f41e.b3519c"
-            ]
         ]
     },
     {
@@ -1789,6 +1773,33 @@
         "y": 1007,
         "wires": [
             []
+        ]
+    },
+    {
+        "id": "3014984e.0911e",
+        "type": "change",
+        "z": "91bb539c.8c2b98",
+        "name": "Prepare query parameters",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "[\t    msg.data.name,\t    msg.data.date,\t    msg.data.jardin,\t    msg.data.species\t]",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 315.5,
+        "y": 605,
+        "wires": [
+            [
+                "1ec8f41e.b3519c"
+            ]
         ]
     }
 ]
