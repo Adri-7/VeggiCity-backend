@@ -271,22 +271,19 @@
         "info": "",
         "in": [
             {
-                "x": 103,
-                "y": 92,
+                "x": 74.11111450195312,
+                "y": 285.33335876464844,
                 "wires": [
                     {
-                        "id": "ba879a82.c52f68"
-                    },
-                    {
-                        "id": "3faee8c2.4614f"
+                        "id": "ea219c68.d3d578"
                     }
                 ]
             }
         ],
         "out": [
             {
-                "x": 1200,
-                "y": 96,
+                "x": 1381.1112670898438,
+                "y": 289.3333740234375,
                 "wires": [
                     {
                         "id": "145da335.99787d",
@@ -295,8 +292,8 @@
                 ]
             },
             {
-                "x": 1143,
-                "y": 221,
+                "x": 1348.5556335449219,
+                "y": 416.55560302734375,
                 "wires": [
                     {
                         "id": "2eb98c0c.6cad44",
@@ -304,6 +301,18 @@
                     },
                     {
                         "id": "c6ef9291.f0be4",
+                        "port": 0
+                    },
+                    {
+                        "id": "d7ff9c6d.4d631",
+                        "port": 0
+                    },
+                    {
+                        "id": "d8a004ff.d673d",
+                        "port": 0
+                    },
+                    {
+                        "id": "98e3b22b.3071",
                         "port": 0
                     }
                 ]
@@ -1354,22 +1363,6 @@
         ]
     },
     {
-        "id": "65b9efa2.89d6d8",
-        "type": "http in",
-        "z": "cf757416.97ca88",
-        "name": "API Server (POST)",
-        "url": "/api/:resource/:id?",
-        "method": "post",
-        "swaggerDoc": "",
-        "x": 210,
-        "y": 730,
-        "wires": [
-            [
-                "6cd73a6f.3d3e54"
-            ]
-        ]
-    },
-    {
         "id": "32d71a1.bcac766",
         "type": "subflow:91bb539c.8c2b98",
         "z": "cf757416.97ca88",
@@ -2316,6 +2309,7 @@
         "id": "6e81c4a0.b6574c",
         "type": "subflow:9532cdda.cdb6c",
         "z": "cf757416.97ca88",
+        "name": "",
         "x": 755.5,
         "y": 994,
         "wires": [
@@ -2340,18 +2334,6 @@
         "wires": []
     },
     {
-        "id": "3faee8c2.4614f",
-        "type": "debug",
-        "z": "9532cdda.cdb6c",
-        "name": "",
-        "active": true,
-        "console": "false",
-        "complete": "true",
-        "x": 317.5,
-        "y": 23,
-        "wires": []
-    },
-    {
         "id": "145da335.99787d",
         "type": "template",
         "z": "9532cdda.cdb6c",
@@ -2360,9 +2342,9 @@
         "fieldType": "msg",
         "format": "json",
         "syntax": "plain",
-        "template": "{\n    \"status\": \"success\",\n    \"message\": \"But it does nothing for the moment!\"\n}",
-        "x": 994.5,
-        "y": 90,
+        "template": "{\n    \"status\": \"success\"\n}",
+        "x": 1175.6112670898438,
+        "y": 283.3333740234375,
         "wires": [
             []
         ]
@@ -2442,8 +2424,8 @@
         ],
         "checkall": "true",
         "outputs": 2,
-        "x": 328,
-        "y": 91,
+        "x": 533.5556335449219,
+        "y": 286.55560302734375,
         "wires": [
             [
                 "a680707d.679a7"
@@ -2470,12 +2452,12 @@
         ],
         "checkall": "true",
         "outputs": 2,
-        "x": 642,
-        "y": 84,
+        "x": 847.5556335449219,
+        "y": 279.55560302734375,
         "wires": [
             [
-                "145da335.99787d",
-                "692f9a83.94cd34"
+                "e43ee92b.351d58",
+                "145da335.99787d"
             ],
             [
                 "c6ef9291.f0be4"
@@ -2492,8 +2474,8 @@
         "format": "handlebars",
         "syntax": "mustache",
         "template": "No resource specified",
-        "x": 558.5,
-        "y": 181,
+        "x": 764.0556335449219,
+        "y": 376.55560302734375,
         "wires": [
             []
         ]
@@ -2508,39 +2490,10 @@
         "format": "handlebars",
         "syntax": "mustache",
         "template": "There is nothing to do here. You may have omitted the subresource identifier or have been mistaken in the HTTP verb.",
-        "x": 887,
-        "y": 143,
+        "x": 1092.5556335449219,
+        "y": 338.55560302734375,
         "wires": [
             []
-        ]
-    },
-    {
-        "id": "9c26c0f3.d9b69",
-        "type": "file",
-        "z": "9532cdda.cdb6c",
-        "name": "",
-        "filename": "",
-        "appendNewline": false,
-        "createDir": true,
-        "overwriteFile": "true",
-        "x": 1113.5,
-        "y": 32,
-        "wires": []
-    },
-    {
-        "id": "692f9a83.94cd34",
-        "type": "function",
-        "z": "9532cdda.cdb6c",
-        "name": "",
-        "func": "msg.filename = \"/home/pi/picture/\" + msg.req.params.id + \".jpg\"\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 914.5,
-        "y": 36,
-        "wires": [
-            [
-                "9c26c0f3.d9b69"
-            ]
         ]
     },
     {
@@ -3372,6 +3325,249 @@
             [
                 "a84957cc.a092"
             ]
+        ]
+    },
+    {
+        "id": "6df18fb7.3b6e48",
+        "type": "change",
+        "z": "9532cdda.cdb6c",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "mimetype",
+                "pt": "msg",
+                "to": "req.headers['content-type']",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1271.1111450195312,
+        "y": 164.44451904296875,
+        "wires": [
+            [
+                "868d3263.3e903"
+            ]
+        ]
+    },
+    {
+        "id": "868d3263.3e903",
+        "type": "file",
+        "z": "9532cdda.cdb6c",
+        "name": "",
+        "filename": "",
+        "appendNewline": false,
+        "createDir": true,
+        "overwriteFile": "true",
+        "x": 1472.2222900390625,
+        "y": 162.22225952148438,
+        "wires": []
+    },
+    {
+        "id": "e43ee92b.351d58",
+        "type": "function",
+        "z": "9532cdda.cdb6c",
+        "name": "msg",
+        "func": "msg.filename = \"/home/pi/picture/\" + msg.req.params.id + \".jpg\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1081.666741265191,
+        "y": 223.33335537380643,
+        "wires": [
+            [
+                "6df18fb7.3b6e48"
+            ]
+        ]
+    },
+    {
+        "id": "23b140d5.b9b7c",
+        "type": "http in",
+        "z": "cf757416.97ca88",
+        "name": "API Server (POST)",
+        "url": "/api/:resource/:id?",
+        "method": "post",
+        "swaggerDoc": "",
+        "x": 210.00003051757812,
+        "y": 733.3333129882812,
+        "wires": [
+            [
+                "6cd73a6f.3d3e54"
+            ]
+        ]
+    },
+    {
+        "id": "ea219c68.d3d578",
+        "type": "assert",
+        "z": "9532cdda.cdb6c",
+        "name": "Ensure request is complete",
+        "rules": [
+            {
+                "property": "req.complete",
+                "propertyType": "msg",
+                "type": "true"
+            },
+            {
+                "property": "req.headers.accept",
+                "propertyType": "msg",
+                "type": "null"
+            }
+        ],
+        "x": 238.33331298828125,
+        "y": 284.4444580078125,
+        "wires": [
+            [
+                "aecb62b7.2fe8d"
+            ]
+        ]
+    },
+    {
+        "id": "68653342.1bd9a4",
+        "type": "catch",
+        "z": "9532cdda.cdb6c",
+        "name": "Catch wrong request",
+        "scope": [
+            "ea219c68.d3d578"
+        ],
+        "x": 698.3333740234375,
+        "y": 462.2222595214844,
+        "wires": [
+            [
+                "d7ff9c6d.4d631"
+            ]
+        ]
+    },
+    {
+        "id": "d7ff9c6d.4d631",
+        "type": "template",
+        "z": "9532cdda.cdb6c",
+        "name": "Bad request",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "Bad request. Please make sure there is no \"Accept\" header in your request and that it is completed.",
+        "x": 913.3333740234375,
+        "y": 458.8889465332031,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "aecb62b7.2fe8d",
+        "type": "assert",
+        "z": "9532cdda.cdb6c",
+        "name": "Limit file size",
+        "rules": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "type": "type",
+                "value": "buffer"
+            },
+            {
+                "property": "payload.length",
+                "propertyType": "msg",
+                "type": "lte",
+                "value": "1000000",
+                "valueType": "str"
+            }
+        ],
+        "x": 288.33331298828125,
+        "y": 350,
+        "wires": [
+            [
+                "d3a9231a.af4d68"
+            ]
+        ]
+    },
+    {
+        "id": "143b083b.08701",
+        "type": "catch",
+        "z": "9532cdda.cdb6c",
+        "name": "Catch file too large",
+        "scope": [
+            "aecb62b7.2fe8d"
+        ],
+        "x": 712.2222900390625,
+        "y": 508.88897705078125,
+        "wires": [
+            [
+                "98e3b22b.3071"
+            ]
+        ]
+    },
+    {
+        "id": "98e3b22b.3071",
+        "type": "template",
+        "z": "9532cdda.cdb6c",
+        "name": "Too large file",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "File too large. Please do not exceed 1MB upload.",
+        "x": 911.1112060546875,
+        "y": 506.6667175292969,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d3a9231a.af4d68",
+        "type": "assert",
+        "z": "9532cdda.cdb6c",
+        "name": "Check Mime Type",
+        "rules": [
+            {
+                "property": "req.headers.content-type",
+                "propertyType": "msg",
+                "type": "cont",
+                "value": "image",
+                "valueType": "str"
+            }
+        ],
+        "x": 271.6667175292969,
+        "y": 405.5555725097656,
+        "wires": [
+            [
+                "ba879a82.c52f68"
+            ]
+        ]
+    },
+    {
+        "id": "d5cf628.740f0a",
+        "type": "catch",
+        "z": "9532cdda.cdb6c",
+        "name": "Catch not image file",
+        "scope": [
+            "d3a9231a.af4d68"
+        ],
+        "x": 713.3333740234375,
+        "y": 555.5555419921875,
+        "wires": [
+            [
+                "d8a004ff.d673d"
+            ]
+        ]
+    },
+    {
+        "id": "d8a004ff.d673d",
+        "type": "template",
+        "z": "9532cdda.cdb6c",
+        "name": "Not image",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "File is not an image file. Only JPEG, PNG or GIF files are accepted.",
+        "x": 908.888916015625,
+        "y": 554.4444580078125,
+        "wires": [
+            []
         ]
     }
 ]

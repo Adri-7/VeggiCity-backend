@@ -23,6 +23,7 @@ The server offers the following API, respecting this URL format: `http://server/
     * [Get a single garden](#get-a-single-garden)
     * [Get the plantations of a garden](#get-the-plantations-of-a-garden)
     * [Add a garden](#add-a-garden)
+    * [Replace the picture of a garden](#replace-the-picture-of-a-garden)
 - [`plantation`](#plantation)
     * [Get a single plantation](#get-a-single-plantation)
     * [Add a plantation](#add-a-plantation)
@@ -73,6 +74,19 @@ The server offers the following API, respecting this URL format: `http://server/
         }
     }
     ```
+
+#### Replace the picture of a garden
+
+- Method: PUT
+- URL: `http://[server]/api/jardin/[garden identifier]/picture`
+- Body: the picture file
+- Example URL: `http://localhost:1880/api/jardin/1/jardin`
+
+##### Note :
+- Make sure to send your **entire** file in the request, and not in several requests (beware of the `Accept: 100/continue` header)
+- The request's body must **only** contain the image file, so the content type of the request must be the content type of the file, and not `multipart/form-data`.
+- The only file formats that are accepted are JPG, PNG, GIF
+- Your file size must not exceed 1MB
 
 ### `plantation`
 
