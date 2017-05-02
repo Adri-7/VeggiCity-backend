@@ -344,6 +344,10 @@
                     {
                         "id": "2d44f299.f39546",
                         "port": 0
+                    },
+                    {
+                        "id": "684ec927.979b98",
+                        "port": 0
                     }
                 ]
             }
@@ -389,6 +393,45 @@
         ]
     },
     {
+        "id": "8a02f2c8.b7f3c8",
+        "type": "subflow",
+        "name": "getMeasures",
+        "info": "",
+        "in": [
+            {
+                "x": 95,
+                "y": 177.5,
+                "wires": [
+                    {
+                        "id": "634ea81f.062a9"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 721.25,
+                "y": 178.75,
+                "wires": [
+                    {
+                        "id": "5a3d30d6.7d80f8",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 721.25,
+                "y": 266.25,
+                "wires": [
+                    {
+                        "id": "8ddfb0f5.bb18b",
+                        "port": 0
+                    }
+                ]
+            }
+        ]
+    },
+    {
         "id": "c0e93a6b.6b218",
         "type": "MySQLdatabase",
         "z": "",
@@ -402,11 +445,11 @@
         "type": "http in",
         "z": "cf757416.97ca88",
         "name": "API Server (GET)",
-        "url": "/api/:resource/:id?/:subid?",
+        "url": "/api/:resource/:id?/:subresource?",
         "method": "get",
         "swaggerDoc": "",
-        "x": 192.16664123535156,
-        "y": 135.38890075683594,
+        "x": 200.1666259765625,
+        "y": 267.38890075683594,
         "wires": [
             [
                 "a7695812.f1ac8"
@@ -432,8 +475,8 @@
         "format": "text",
         "syntax": "mustache",
         "template": "Unknown resource: {{{req.params.resource}}}.",
-        "x": 780.8333740234375,
-        "y": 918.6666259765625,
+        "x": 786.8333740234375,
+        "y": 1256.6666259765625,
         "wires": [
             [
                 "568149d7.fddb88"
@@ -469,8 +512,8 @@
         ],
         "checkall": "false",
         "outputs": 4,
-        "x": 481.16664123535156,
-        "y": 135.38890075683594,
+        "x": 489.1666259765625,
+        "y": 267.38890075683594,
         "wires": [
             [
                 "a5bc934f.716eb"
@@ -496,8 +539,8 @@
         "format": "json",
         "syntax": "mustache",
         "template": "{\n    \"status\": \"error\",\n    \"message\": \"{{error.message}}\"\n}",
-        "x": 1021.1666870117188,
-        "y": 813,
+        "x": 1027.1666870117188,
+        "y": 1151,
         "wires": [
             [
                 "f6aabc36.9a9aa"
@@ -539,8 +582,8 @@
         "type": "subflow:c0c690e.17165f",
         "z": "cf757416.97ca88",
         "name": "",
-        "x": 1249.250015258789,
-        "y": 148.88885498046875,
+        "x": 1239.75,
+        "y": 188.38885498046875,
         "wires": [
             [
                 "a6cb2200.99618"
@@ -624,8 +667,8 @@
         "type": "subflow:60ebfa82.7e48a4",
         "z": "cf757416.97ca88",
         "name": "",
-        "x": 1134.9444732666016,
-        "y": 20,
+        "x": 1133.6944580078125,
+        "y": 65.75,
         "wires": [
             [
                 "a6cb2200.99618"
@@ -640,8 +683,8 @@
         "func": "msg.statusCode = 400;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 1272,
-        "y": 813,
+        "x": 1278,
+        "y": 1151,
         "wires": [
             [
                 "a6cb2200.99618"
@@ -654,8 +697,8 @@
         "z": "cf757416.97ca88",
         "name": "Catch generic errors",
         "scope": null,
-        "x": 451.5,
-        "y": 872,
+        "x": 457.5,
+        "y": 1210,
         "wires": [
             [
                 "5010ba9e.8d5ac4"
@@ -672,8 +715,8 @@
         "format": "text",
         "syntax": "plain",
         "template": "Internal server error.",
-        "x": 761,
-        "y": 869,
+        "x": 767,
+        "y": 1207,
         "wires": [
             [
                 "568149d7.fddb88"
@@ -685,8 +728,8 @@
         "type": "subflow:f5cdc70a.d1345",
         "z": "cf757416.97ca88",
         "name": "",
-        "x": 768,
-        "y": 392,
+        "x": 774,
+        "y": 730,
         "wires": [
             [
                 "a6cb2200.99618"
@@ -780,10 +823,11 @@
             "ccd25db.9be51a",
             "f96e5746.274188",
             "9bb1173e.b4779",
-            "ab508868.bedc8"
+            "ab508868.bedc8",
+            "e8c076f.91a5c88"
         ],
-        "x": 818.5,
-        "y": 814,
+        "x": 824.5,
+        "y": 1152,
         "wires": [
             [
                 "568149d7.fddb88"
@@ -798,8 +842,8 @@
         "links": [
             "5f0ab50a.1ba7e4"
         ],
-        "x": 896.5,
-        "y": 410,
+        "x": 902.5,
+        "y": 748,
         "wires": []
     },
     {
@@ -1072,8 +1116,8 @@
         "links": [
             "5f0ab50a.1ba7e4"
         ],
-        "x": 1385.111099243164,
-        "y": 158.22219848632812,
+        "x": 1375.611083984375,
+        "y": 197.72219848632812,
         "wires": []
     },
     {
@@ -1081,8 +1125,8 @@
         "type": "subflow:62b88822.e0ba48",
         "z": "cf757416.97ca88",
         "name": "",
-        "x": 1050.3451538085938,
-        "y": 148.13885498046875,
+        "x": 1265.8452758789062,
+        "y": 278.88885498046875,
         "wires": [
             [
                 "a6cb2200.99618"
@@ -1100,8 +1144,8 @@
         "links": [
             "5f0ab50a.1ba7e4"
         ],
-        "x": 1164.8451538085938,
-        "y": 172.13885498046875,
+        "x": 1380.3452758789062,
+        "y": 299.13885498046875,
         "wires": []
     },
     {
@@ -1273,8 +1317,8 @@
         "url": "/api/:resource/:id?",
         "method": "post",
         "swaggerDoc": "",
-        "x": 204,
-        "y": 392,
+        "x": 210,
+        "y": 730,
         "wires": [
             [
                 "6cd73a6f.3d3e54"
@@ -1286,8 +1330,8 @@
         "type": "subflow:91bb539c.8c2b98",
         "z": "cf757416.97ca88",
         "name": "",
-        "x": 777.5,
-        "y": 348,
+        "x": 783.5,
+        "y": 686,
         "wires": [
             [
                 "a6cb2200.99618"
@@ -1740,8 +1784,8 @@
         "links": [
             "5f0ab50a.1ba7e4"
         ],
-        "x": 897,
-        "y": 360,
+        "x": 903,
+        "y": 698,
         "wires": []
     },
     {
@@ -1834,8 +1878,8 @@
         "url": "/api/:resource/:id?",
         "method": "delete",
         "swaggerDoc": "",
-        "x": 215,
-        "y": 550,
+        "x": 221,
+        "y": 888,
         "wires": [
             [
                 "7bbf95a7.3fde64"
@@ -1966,8 +2010,8 @@
         "type": "subflow:6f7fbf07.4b33a",
         "z": "cf757416.97ca88",
         "name": "",
-        "x": 1065.5,
-        "y": 521,
+        "x": 1071.5,
+        "y": 859,
         "wires": [
             [
                 "a6cb2200.99618"
@@ -2001,14 +2045,15 @@
         ],
         "checkall": "false",
         "outputs": 3,
-        "x": 498,
-        "y": 392,
+        "x": 504,
+        "y": 730,
         "wires": [
             [
                 "32d71a1.bcac766"
             ],
             [
-                "caa219fc.8a0be"
+                "caa219fc.8a0be",
+                "1a7f400f.11ee18"
             ],
             [
                 "71e5e4ce.6f8094"
@@ -2026,8 +2071,8 @@
             "baaa8ccd.aa15c8",
             "bc56ad91.b46998"
         ],
-        "x": 651.5,
-        "y": 918,
+        "x": 657.5,
+        "y": 1256,
         "wires": [
             [
                 "284a0285.11f016"
@@ -2042,8 +2087,8 @@
         "links": [
             "46f41609.e60888"
         ],
-        "x": 628.1666412353516,
-        "y": 166.38890075683594,
+        "x": 644.9166107177734,
+        "y": 330.8888854980469,
         "wires": []
     },
     {
@@ -2054,8 +2099,8 @@
         "links": [
             "46f41609.e60888"
         ],
-        "x": 641,
-        "y": 434,
+        "x": 647,
+        "y": 772,
         "wires": []
     },
     {
@@ -2075,8 +2120,8 @@
         ],
         "checkall": "true",
         "outputs": 2,
-        "x": 801.1666412353516,
-        "y": 77.38890075683594,
+        "x": 807.9166259765625,
+        "y": 133.13890075683594,
         "wires": [
             [
                 "594cde33.5b3f78"
@@ -2105,8 +2150,8 @@
         ],
         "checkall": "false",
         "outputs": 2,
-        "x": 501,
-        "y": 550,
+        "x": 507,
+        "y": 888,
         "wires": [
             [
                 "5170d674.638dc8"
@@ -2124,8 +2169,8 @@
         "links": [
             "46f41609.e60888"
         ],
-        "x": 647,
-        "y": 568,
+        "x": 653,
+        "y": 906,
         "wires": []
     },
     {
@@ -2136,8 +2181,8 @@
         "links": [
             "5f0ab50a.1ba7e4"
         ],
-        "x": 1209,
-        "y": 539,
+        "x": 1215,
+        "y": 877,
         "wires": []
     },
     {
@@ -2157,8 +2202,8 @@
         ],
         "checkall": "true",
         "outputs": 2,
-        "x": 817,
-        "y": 541,
+        "x": 823,
+        "y": 879,
         "wires": [
             [
                 "115668bf.838a8f"
@@ -2178,8 +2223,8 @@
         "format": "text",
         "syntax": "plain",
         "template": "Missing ID parameter.",
-        "x": 801,
-        "y": 967,
+        "x": 807,
+        "y": 1305,
         "wires": [
             [
                 "568149d7.fddb88"
@@ -2196,8 +2241,8 @@
             "d330f533.5ade68",
             "c20063f8.2e80f"
         ],
-        "x": 651.5,
-        "y": 969,
+        "x": 657.5,
+        "y": 1307,
         "wires": [
             [
                 "db22c410.ed5418"
@@ -2212,16 +2257,16 @@
         "links": [
             "728355d3.d9d8dc"
         ],
-        "x": 989.5,
-        "y": 563,
+        "x": 995.5,
+        "y": 901,
         "wires": []
     },
     {
         "id": "6e81c4a0.b6574c",
         "type": "subflow:9532cdda.cdb6c",
         "z": "cf757416.97ca88",
-        "x": 749.5,
-        "y": 656,
+        "x": 755.5,
+        "y": 994,
         "wires": [
             [
                 "a6cb2200.99618"
@@ -2239,8 +2284,8 @@
         "links": [
             "5f0ab50a.1ba7e4"
         ],
-        "x": 863,
-        "y": 667,
+        "x": 869,
+        "y": 1005,
         "wires": []
     },
     {
@@ -2279,8 +2324,8 @@
         "url": "/api/:resource/:id?/:subresource?",
         "method": "put",
         "swaggerDoc": "",
-        "x": 195,
-        "y": 660,
+        "x": 201,
+        "y": 998,
         "wires": [
             [
                 "6b32618c.1f0678"
@@ -2306,8 +2351,8 @@
         ],
         "checkall": "false",
         "outputs": 2,
-        "x": 498,
-        "y": 661,
+        "x": 504,
+        "y": 999,
         "wires": [
             [
                 "6e81c4a0.b6574c"
@@ -2325,8 +2370,8 @@
         "links": [
             "46f41609.e60888"
         ],
-        "x": 656,
-        "y": 696,
+        "x": 662,
+        "y": 1034,
         "wires": []
     },
     {
@@ -2452,7 +2497,7 @@
         "type": "switch",
         "z": "cf757416.97ca88",
         "name": "Is there a subresource",
-        "property": "req.params.id",
+        "property": "req.params.subresource",
         "propertyType": "msg",
         "rules": [
             {
@@ -2467,10 +2512,10 @@
                 "t": "else"
             }
         ],
-        "checkall": "true",
+        "checkall": "false",
         "outputs": 3,
-        "x": 1051.6666412353516,
-        "y": 83.88890075683594,
+        "x": 1065.9166870117188,
+        "y": 139.63890075683594,
         "wires": [
             [
                 "4197c057.ef90a8"
@@ -2488,8 +2533,8 @@
         "type": "subflow:bb046e2c.50cdc",
         "z": "cf757416.97ca88",
         "name": "",
-        "x": 1250.4166412353516,
-        "y": 75.13890075683594,
+        "x": 1309.666748046875,
+        "y": 140.88890075683594,
         "wires": [
             [
                 "a6cb2200.99618"
@@ -2507,8 +2552,8 @@
         "links": [
             "5f0ab50a.1ba7e4"
         ],
-        "x": 1357.9166412353516,
-        "y": 103.88890075683594,
+        "x": 1439.6665649414062,
+        "y": 170.88890075683594,
         "wires": []
     },
     {
@@ -2604,8 +2649,8 @@
         "links": [
             "845631b1.04edb"
         ],
-        "x": 1212.9166412353516,
-        "y": 112.63890075683594,
+        "x": 1214.666748046875,
+        "y": 155.88890075683594,
         "wires": []
     },
     {
@@ -2614,10 +2659,11 @@
         "z": "cf757416.97ca88",
         "name": "Unknown subresource",
         "links": [
-            "2db919b9.1509d6"
+            "2db919b9.1509d6",
+            "9914e7fc.ff32b8"
         ],
-        "x": 640,
-        "y": 1017.5,
+        "x": 646,
+        "y": 1355.5,
         "wires": [
             [
                 "a783f671.df4f2"
@@ -2633,9 +2679,9 @@
         "fieldType": "msg",
         "format": "text",
         "syntax": "mustache",
-        "template": "Unknown resource: {{{req.params.subresource}}}.",
-        "x": 771.25,
-        "y": 1017.5,
+        "template": "Unknown subresource: {{{req.params.subresource}}}.",
+        "x": 777.25,
+        "y": 1355.5,
         "wires": [
             [
                 "568149d7.fddb88"
@@ -2646,8 +2692,8 @@
         "id": "ac32d4a6.793a58",
         "type": "subflow:fa882373.ddcd1",
         "z": "cf757416.97ca88",
-        "x": 755.238037109375,
-        "y": 177.28176879882812,
+        "x": 758.2380676269531,
+        "y": 323.0317687988281,
         "wires": [
             [
                 "a6cb2200.99618"
@@ -2665,8 +2711,8 @@
         "links": [
             "5f0ab50a.1ba7e4"
         ],
-        "x": 862.738037109375,
-        "y": 199.78176879882812,
+        "x": 865.7380676269531,
+        "y": 345.5317687988281,
         "wires": []
     },
     {
@@ -2748,11 +2794,11 @@
         ],
         "checkall": "true",
         "outputs": 2,
-        "x": 801.4285888671875,
-        "y": 134.28570556640625,
+        "x": 809.4286193847656,
+        "y": 228.78570556640625,
         "wires": [
             [
-                "e764a94d.bb9be"
+                "562b3a1c.17aba4"
             ],
             [
                 "c20063f8.2e80f"
@@ -2767,8 +2813,8 @@
         "links": [
             "728355d3.d9d8dc"
         ],
-        "x": 948.5713500976562,
-        "y": 164.28567504882812,
+        "x": 952.8214111328125,
+        "y": 277.53570556640625,
         "wires": []
     },
     {
@@ -2793,5 +2839,219 @@
                 "ba65c1e5.e71bd8"
             ]
         ]
+    },
+    {
+        "id": "562b3a1c.17aba4",
+        "type": "switch",
+        "z": "cf757416.97ca88",
+        "name": "Is there a subresource",
+        "property": "req.params.subresource",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "measure",
+                "vt": "str"
+            },
+            {
+                "t": "nnull"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "outputs": 3,
+        "x": 1059.25,
+        "y": 222,
+        "wires": [
+            [
+                "a6de5f6.348672"
+            ],
+            [
+                "9914e7fc.ff32b8"
+            ],
+            [
+                "e764a94d.bb9be"
+            ]
+        ]
+    },
+    {
+        "id": "9914e7fc.ff32b8",
+        "type": "link out",
+        "z": "cf757416.97ca88",
+        "name": "",
+        "links": [
+            "845631b1.04edb"
+        ],
+        "x": 1208.75,
+        "y": 245,
+        "wires": []
+    },
+    {
+        "id": "a6de5f6.348672",
+        "type": "subflow:8a02f2c8.b7f3c8",
+        "z": "cf757416.97ca88",
+        "x": 1312.5,
+        "y": 235,
+        "wires": [
+            [
+                "a6cb2200.99618"
+            ],
+            [
+                "e8c076f.91a5c88"
+            ]
+        ]
+    },
+    {
+        "id": "e8c076f.91a5c88",
+        "type": "link out",
+        "z": "cf757416.97ca88",
+        "name": "addMeasure error output",
+        "links": [
+            "5f0ab50a.1ba7e4"
+        ],
+        "x": 1418.75,
+        "y": 247.5,
+        "wires": []
+    },
+    {
+        "id": "634ea81f.062a9",
+        "type": "assert",
+        "z": "8a02f2c8.b7f3c8",
+        "name": "Check ID",
+        "rules": [
+            {
+                "property": "req.params.id",
+                "propertyType": "msg",
+                "type": "regex",
+                "value": "\\d+",
+                "valueType": "str",
+                "case": false
+            }
+        ],
+        "x": 220,
+        "y": 177.5,
+        "wires": [
+            [
+                "add20221.3d6558"
+            ]
+        ]
+    },
+    {
+        "id": "add20221.3d6558",
+        "type": "template",
+        "z": "8a02f2c8.b7f3c8",
+        "name": "Build query",
+        "field": "topic",
+        "fieldType": "msg",
+        "format": "text",
+        "syntax": "mustache",
+        "template": "SELECT *\nFROM Mesure\nWHERE IdPlantation = {{{req.params.id}}};",
+        "x": 391.25,
+        "y": 178.75,
+        "wires": [
+            [
+                "5a3d30d6.7d80f8"
+            ]
+        ]
+    },
+    {
+        "id": "5a3d30d6.7d80f8",
+        "type": "mysql",
+        "z": "8a02f2c8.b7f3c8",
+        "mydb": "c0e93a6b.6b218",
+        "name": "Run query",
+        "x": 570,
+        "y": 178.75,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5d266961.ccc4",
+        "type": "catch",
+        "z": "8a02f2c8.b7f3c8",
+        "name": "Catch ID error",
+        "scope": [
+            "634ea81f.062a9"
+        ],
+        "x": 387.5,
+        "y": 268.75,
+        "wires": [
+            [
+                "8ddfb0f5.bb18b"
+            ]
+        ]
+    },
+    {
+        "id": "8ddfb0f5.bb18b",
+        "type": "template",
+        "z": "8a02f2c8.b7f3c8",
+        "name": "ID error",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "text",
+        "syntax": "plain",
+        "template": "ID must be numeric",
+        "x": 570,
+        "y": 266.25,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4f723b67.cc9bcc",
+        "type": "debug",
+        "z": "cf757416.97ca88",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "true",
+        "x": 1103.75,
+        "y": 422.5,
+        "wires": []
+    },
+    {
+        "id": "af80d092.89dea8",
+        "type": "catch",
+        "z": "bb046e2c.50cdc",
+        "name": "Generic error",
+        "scope": null,
+        "x": 351.25,
+        "y": 275,
+        "wires": [
+            [
+                "684ec927.979b98"
+            ]
+        ]
+    },
+    {
+        "id": "684ec927.979b98",
+        "type": "template",
+        "z": "bb046e2c.50cdc",
+        "name": "Generic error",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "text",
+        "syntax": "plain",
+        "template": "Internal server error.",
+        "x": 553.75,
+        "y": 272.5,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1a7f400f.11ee18",
+        "type": "debug",
+        "z": "cf757416.97ca88",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 796.25,
+        "y": 778.75,
+        "wires": []
     }
 ]
