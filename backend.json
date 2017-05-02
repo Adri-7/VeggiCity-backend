@@ -90,8 +90,8 @@
         ],
         "out": [
             {
-                "x": 929,
-                "y": 441.75,
+                "x": 1210.2500610351562,
+                "y": 448,
                 "wires": [
                     {
                         "id": "f931511d.4df85",
@@ -971,7 +971,7 @@
         "y": 236,
         "wires": [
             [
-                "5d39668c.4b95b8"
+                "b5152456.1278e"
             ]
         ]
     },
@@ -1004,9 +1004,9 @@
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": "INSERT INTO Mesure (Temperature, Humidite, IdPlantation)\nVALUES ({{data.temperature}}, {{data.moisture}}, {{data.plantation}});",
-        "x": 259.5,
-        "y": 443,
+        "template": "INSERT INTO Mesure (Temperature, Humidite, IdPlantation, Date)\nVALUES (?, ?, ?, CURRENT_TIMESTAMP());",
+        "x": 540.7500610351562,
+        "y": 449.25,
         "wires": [
             [
                 "8ed3d032.57b34"
@@ -1036,8 +1036,8 @@
         "z": "f5cdc70a.d1345",
         "mydb": "c0e93a6b.6b218",
         "name": "Insert the new data",
-        "x": 502.5,
-        "y": 444,
+        "x": 783.7500610351562,
+        "y": 450.25,
         "wires": [
             [
                 "f931511d.4df85"
@@ -1070,8 +1070,8 @@
         "format": "json",
         "syntax": "plain",
         "template": "{\n    \"status\": \"success\"\n}",
-        "x": 736.5,
-        "y": 445,
+        "x": 1017.7500610351562,
+        "y": 451.25,
         "wires": [
             []
         ]
@@ -2052,8 +2052,7 @@
                 "32d71a1.bcac766"
             ],
             [
-                "caa219fc.8a0be",
-                "1a7f400f.11ee18"
+                "caa219fc.8a0be"
             ],
             [
                 "71e5e4ce.6f8094"
@@ -3031,15 +3030,30 @@
         ]
     },
     {
-        "id": "1a7f400f.11ee18",
-        "type": "debug",
-        "z": "cf757416.97ca88",
-        "name": "",
-        "active": true,
-        "console": "false",
-        "complete": "false",
-        "x": 796.25,
-        "y": 778.75,
-        "wires": []
+        "id": "b5152456.1278e",
+        "type": "change",
+        "z": "f5cdc70a.d1345",
+        "name": "Prepare query parameters",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "[\t    msg.data.temperature,\t    msg.data.moisture,\t    msg.data.plantation\t]",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 295,
+        "y": 450,
+        "wires": [
+            [
+                "5d39668c.4b95b8"
+            ]
+        ]
     }
 ]
