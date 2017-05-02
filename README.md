@@ -25,6 +25,7 @@ The server offers the following API, respecting this URL format: `http://server/
 - [`plantation`](#plantation)
     * [Get a single plantation](#get-a-single-plantation)
     * [Add a plantation](#add-a-plantation)
+- [`species`](#species)
 - [`measure`](#measure)
     * [Add a measure](#add-a-measure)
 
@@ -75,6 +76,14 @@ The server offers the following API, respecting this URL format: `http://server/
         "date": "2017-04-29"
     }
     ```
+
+### `species`
+
+#### Get a single species
+
+- Method: GET
+- URL: `http://[server]/api/species/[species identifier]`
+- Example URL: `http://localhost:1880/api/species/1`
 
 ### `measure`
 
