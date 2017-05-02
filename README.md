@@ -26,6 +26,7 @@ The server offers the following API, respecting this URL format: `http://server/
     * [Get a single plantation](#get-a-single-plantation)
     * [Add a plantation](#add-a-plantation)
 - [`species`](#species)
+    * [Get a single species](#get-a-single-species)
 - [`measure`](#measure)
     * [Add a measure](#add-a-measure)
 
