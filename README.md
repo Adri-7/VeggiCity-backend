@@ -22,6 +22,7 @@ The server offers the following API, respecting this URL format: `http://server/
     * [Get all the gardens](#get-all-the-gardens)
     * [Get a single garden](#get-a-single-garden)
     * [Get the plantations of a garden](#get-the-plantations-of-a-garden)
+    * [Add a garden](#add-a-garden)
 - [`plantation`](#plantation)
     * [Get a single plantation](#get-a-single-plantation)
     * [Add a plantation](#add-a-plantation)
@@ -50,6 +51,28 @@ The server offers the following API, respecting this URL format: `http://server/
 - Method: GET
 - URL: `http://[server]/api/jardin/[garden identifier]/plantation`
 - Example URL : `http://localhost:1880/api/jardin/1/plantation`
+
+#### Add a garden
+
+- Method: POST
+- URL: `http://[server]/api/jardin`
+- Body:
+    - `name` (`string`) : The name to give to this plantation
+    - `position` (`object`) : The GPS position of the garden, containing:
+        - `lat` (`number`) : the latitude of the garden
+        - `lon` (`number`) : the longitude of the garden
+        
+- Example URL: `http://localhost:1880/api/jardin`
+- Example Body:
+    ```
+    {
+        "name": "Le Doua Vert",
+        "position": {
+            "lat": 45.784001,
+            "lon": 4.872478
+        }
+    }
+    ```
 
 ### `plantation`
 
