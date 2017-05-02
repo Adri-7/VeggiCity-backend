@@ -432,6 +432,49 @@
         ]
     },
     {
+        "id": "9cf2d673.54a5e",
+        "type": "subflow",
+        "name": "addJardin",
+        "info": "",
+        "in": [
+            {
+                "x": 146.25,
+                "y": 483.75,
+                "wires": [
+                    {
+                        "id": "6005f721.9eb47"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 1191.25,
+                "y": 607.5,
+                "wires": [
+                    {
+                        "id": "e714db6d.c9912",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 980,
+                "y": 881.25,
+                "wires": [
+                    {
+                        "id": "c58cd418.bf6558",
+                        "port": 0
+                    },
+                    {
+                        "id": "7cba3170.7a42d8",
+                        "port": 0
+                    }
+                ]
+            }
+        ]
+    },
+    {
         "id": "c0e93a6b.6b218",
         "type": "MySQLdatabase",
         "z": "",
@@ -824,7 +867,8 @@
             "f96e5746.274188",
             "9bb1173e.b4779",
             "ab508868.bedc8",
-            "e8c076f.91a5c88"
+            "e8c076f.91a5c88",
+            "a1f73269.2f7998"
         ],
         "x": 824.5,
         "y": 1152,
@@ -2040,11 +2084,16 @@
                 "vt": "str"
             },
             {
+                "t": "eq",
+                "v": "jardin",
+                "vt": "str"
+            },
+            {
                 "t": "else"
             }
         ],
         "checkall": "false",
-        "outputs": 3,
+        "outputs": 4,
         "x": 504,
         "y": 730,
         "wires": [
@@ -2053,6 +2102,9 @@
             ],
             [
                 "caa219fc.8a0be"
+            ],
+            [
+                "faa7758e.5b33b"
             ],
             [
                 "71e5e4ce.6f8094"
@@ -3053,6 +3105,272 @@
         "wires": [
             [
                 "5d39668c.4b95b8"
+            ]
+        ]
+    },
+    {
+        "id": "6005f721.9eb47",
+        "type": "assert",
+        "z": "9cf2d673.54a5e",
+        "name": "Check garden data",
+        "rules": [
+            {
+                "property": "payload.name",
+                "propertyType": "msg",
+                "type": "type",
+                "value": "string"
+            },
+            {
+                "property": "payload.position",
+                "propertyType": "msg",
+                "type": "type",
+                "value": "object"
+            },
+            {
+                "property": "payload.position.lat",
+                "propertyType": "msg",
+                "type": "type",
+                "value": "number"
+            },
+            {
+                "property": "payload.position.lon",
+                "propertyType": "msg",
+                "type": "type",
+                "value": "number"
+            }
+        ],
+        "x": 292.5,
+        "y": 483.75,
+        "wires": [
+            [
+                "4437e5c2.8028cc"
+            ]
+        ]
+    },
+    {
+        "id": "f3b22ec1.90818",
+        "type": "comment",
+        "z": "9cf2d673.54a5e",
+        "name": "Error output",
+        "info": "",
+        "x": 1020.25,
+        "y": 822,
+        "wires": []
+    },
+    {
+        "id": "85c160cd.2f367",
+        "type": "catch",
+        "z": "9cf2d673.54a5e",
+        "name": "Catch invalid input",
+        "scope": [
+            "dde679be.bf36d",
+            "6005f721.9eb47"
+        ],
+        "x": 556.25,
+        "y": 784,
+        "wires": [
+            [
+                "c58cd418.bf6558"
+            ]
+        ]
+    },
+    {
+        "id": "c58cd418.bf6558",
+        "type": "template",
+        "z": "9cf2d673.54a5e",
+        "name": "Invalid input",
+        "field": "error.message",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "plain",
+        "template": "Invalid input: some required fields have been omitted or are not of right type.",
+        "x": 743.75,
+        "y": 783,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b7be6fb.1ecd19",
+        "type": "comment",
+        "z": "9cf2d673.54a5e",
+        "name": "Check request validity",
+        "info": "",
+        "x": 161,
+        "y": 419.75,
+        "wires": []
+    },
+    {
+        "id": "f3903224.272ad8",
+        "type": "comment",
+        "z": "9cf2d673.54a5e",
+        "name": "Insert the data into the database",
+        "info": "",
+        "x": 193.25,
+        "y": 546,
+        "wires": []
+    },
+    {
+        "id": "54af7907.1042d",
+        "type": "template",
+        "z": "9cf2d673.54a5e",
+        "name": "Build insert query",
+        "field": "topic",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "INSERT INTO Jardin (Nom, Latitude, Longitude)\nVALUES (?, ?, ?);",
+        "x": 538.25,
+        "y": 606,
+        "wires": [
+            [
+                "9a4a83e4.7d2ff"
+            ]
+        ]
+    },
+    {
+        "id": "707d9464.0360ac",
+        "type": "catch",
+        "z": "9cf2d673.54a5e",
+        "name": "Catch DB error",
+        "scope": [
+            "9a4a83e4.7d2ff",
+            "5a495d7f.dfda54",
+            "a06ab560.9c6498"
+        ],
+        "x": 568.25,
+        "y": 872,
+        "wires": [
+            [
+                "7cba3170.7a42d8"
+            ]
+        ]
+    },
+    {
+        "id": "9a4a83e4.7d2ff",
+        "type": "mysql",
+        "z": "9cf2d673.54a5e",
+        "mydb": "c0e93a6b.6b218",
+        "name": "Insert the new data",
+        "x": 781.25,
+        "y": 607,
+        "wires": [
+            [
+                "e714db6d.c9912"
+            ]
+        ]
+    },
+    {
+        "id": "7cba3170.7a42d8",
+        "type": "template",
+        "z": "9cf2d673.54a5e",
+        "name": "DB error",
+        "field": "error.message",
+        "fieldType": "msg",
+        "format": "text",
+        "syntax": "plain",
+        "template": "Database access error.",
+        "x": 734.75,
+        "y": 871,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e714db6d.c9912",
+        "type": "template",
+        "z": "9cf2d673.54a5e",
+        "name": "Build success response",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "json",
+        "syntax": "plain",
+        "template": "{\n    \"status\": \"success\"\n}",
+        "x": 1015.25,
+        "y": 608,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a84957cc.a092",
+        "type": "change",
+        "z": "9cf2d673.54a5e",
+        "name": "Prepare query parameters",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "[\t    msg.data.name,\t    msg.data.position.lat,\t    msg.data.position.lon\t]",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 293.75,
+        "y": 606,
+        "wires": [
+            [
+                "54af7907.1042d"
+            ]
+        ]
+    },
+    {
+        "id": "faa7758e.5b33b",
+        "type": "subflow:9cf2d673.54a5e",
+        "z": "cf757416.97ca88",
+        "name": "",
+        "x": 765,
+        "y": 772.5,
+        "wires": [
+            [
+                "a6cb2200.99618"
+            ],
+            [
+                "a1f73269.2f7998"
+            ]
+        ]
+    },
+    {
+        "id": "a1f73269.2f7998",
+        "type": "link out",
+        "z": "cf757416.97ca88",
+        "name": "addMeasure error output",
+        "links": [
+            "5f0ab50a.1ba7e4"
+        ],
+        "x": 867.5,
+        "y": 801.25,
+        "wires": []
+    },
+    {
+        "id": "4437e5c2.8028cc",
+        "type": "change",
+        "z": "9cf2d673.54a5e",
+        "name": "Save request data",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "data",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 531.5,
+        "y": 483,
+        "wires": [
+            [
+                "a84957cc.a092"
             ]
         ]
     }
