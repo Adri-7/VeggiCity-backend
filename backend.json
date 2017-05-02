@@ -2860,7 +2860,7 @@
                 "t": "else"
             }
         ],
-        "checkall": "true",
+        "checkall": "false",
         "outputs": 3,
         "x": 1059.25,
         "y": 222,
@@ -2999,18 +2999,6 @@
         "wires": [
             []
         ]
-    },
-    {
-        "id": "4f723b67.cc9bcc",
-        "type": "debug",
-        "z": "cf757416.97ca88",
-        "name": "",
-        "active": true,
-        "console": "false",
-        "complete": "true",
-        "x": 1103.75,
-        "y": 422.5,
-        "wires": []
     },
     {
         "id": "af80d092.89dea8",
