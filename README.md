@@ -28,6 +28,7 @@ The server offers the following API, respecting this URL format: `http://server/
 - [`species`](#species)
     * [Get a single species](#get-a-single-species)
 - [`measure`](#measure)
+    * [Get the measures available for a plantation](#get-the-measures-available-for-a-plantation)
     * [Add a measure](#add-a-measure)
 
 ### `jardin`
@@ -87,6 +88,12 @@ The server offers the following API, respecting this URL format: `http://server/
 - Example URL: `http://localhost:1880/api/species/1`
 
 ### `measure`
+
+#### Get the measures available for a plantation
+
+- Method: GET
+- URL: `http://[server]/api/plantation/[plantation identifier]/measure`
+- Example URL: `http://localhost:1880/api/plantation/1/measure`
 
 #### Add a measure
 
