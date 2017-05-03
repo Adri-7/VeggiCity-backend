@@ -29,6 +29,7 @@ The server offers the following API, respecting this URL format: `http://server/
     * [Get a single plantation](#get-a-single-plantation)
     * [Add a plantation](#add-a-plantation)
 - [`species`](#species)
+    * [Get all the species](#get-all-the-species)
     * [Get a single species](#get-a-single-species)
 - [`measure`](#measure)
     * [Get the measures available for a plantation](#get-the-measures-available-for-a-plantation)
@@ -124,6 +125,12 @@ The server offers the following API, respecting this URL format: `http://server/
     ```
 
 ### `species`
+
+#### Get all the species
+
+- Method: GET
+- URL: `http://[server]/api/species`
+- Example URL: `http://localhost:1880/api/species`
 
 #### Get a single species
 
