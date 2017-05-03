@@ -484,6 +484,84 @@
         ]
     },
     {
+        "id": "7e125cac.4a335c",
+        "type": "subflow",
+        "name": "getPicture",
+        "info": "",
+        "in": [
+            {
+                "x": 145.5555419921875,
+                "y": 141.11111450195312,
+                "wires": [
+                    {
+                        "id": "595bf42.5f8318c"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 708.888916015625,
+                "y": 136.6666717529297,
+                "wires": [
+                    {
+                        "id": "5c95f385.c38914",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 709.4444580078125,
+                "y": 192.2222442626953,
+                "wires": [
+                    {
+                        "id": "b746c113.165588",
+                        "port": 0
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "98185682.0be158",
+        "type": "subflow",
+        "name": "getAllSpecies",
+        "info": "",
+        "in": [
+            {
+                "x": 147.7777862548828,
+                "y": 132.22222900390625,
+                "wires": [
+                    {
+                        "id": "4827d04f.178758"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 685.5556030273438,
+                "y": 126.66668701171875,
+                "wires": [
+                    {
+                        "id": "d3aa7112.fd2b1",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 689.4444580078125,
+                "y": 207.77780151367188,
+                "wires": [
+                    {
+                        "id": "aa9f201.eb89d6",
+                        "port": 0
+                    }
+                ]
+            }
+        ]
+    },
+    {
         "id": "c0e93a6b.6b218",
         "type": "MySQLdatabase",
         "z": "",
@@ -574,7 +652,7 @@
                 "10576df6.2e3322"
             ],
             [
-                "ac32d4a6.793a58"
+                "b692332a.deb14"
             ],
             [
                 "65b40eb7.d1b58"
@@ -719,8 +797,8 @@
         "type": "subflow:60ebfa82.7e48a4",
         "z": "cf757416.97ca88",
         "name": "",
-        "x": 1133.6944580078125,
-        "y": 65.75,
+        "x": 1253.6944580078125,
+        "y": 27.97223663330078,
         "wires": [
             [
                 "a6cb2200.99618"
@@ -877,7 +955,9 @@
             "9bb1173e.b4779",
             "ab508868.bedc8",
             "e8c076f.91a5c88",
-            "a1f73269.2f7998"
+            "a1f73269.2f7998",
+            "fee655f0.121ba8",
+            "9245c5d1.f972c"
         ],
         "x": 824.5,
         "y": 1152,
@@ -2283,7 +2363,8 @@
         "links": [
             "667b9478.d24054",
             "d330f533.5ade68",
-            "c20063f8.2e80f"
+            "c20063f8.2e80f",
+            "a3b7915d.9b03c"
         ],
         "x": 657.5,
         "y": 1307,
@@ -2510,6 +2591,11 @@
                 "vt": "str"
             },
             {
+                "t": "eq",
+                "v": "picture",
+                "vt": "str"
+            },
+            {
                 "t": "nnull"
             },
             {
@@ -2517,12 +2603,15 @@
             }
         ],
         "checkall": "false",
-        "outputs": 3,
+        "outputs": 4,
         "x": 1065.9166870117188,
         "y": 139.63890075683594,
         "wires": [
             [
                 "4197c057.ef90a8"
+            ],
+            [
+                "e7be5398.a59dd8"
             ],
             [
                 "2db919b9.1509d6"
@@ -2537,8 +2626,8 @@
         "type": "subflow:bb046e2c.50cdc",
         "z": "cf757416.97ca88",
         "name": "",
-        "x": 1309.666748046875,
-        "y": 140.88890075683594,
+        "x": 1261.88916015625,
+        "y": 84.22225189208984,
         "wires": [
             [
                 "a6cb2200.99618"
@@ -2556,8 +2645,8 @@
         "links": [
             "5f0ab50a.1ba7e4"
         ],
-        "x": 1439.6665649414062,
-        "y": 170.88890075683594,
+        "x": 1381.888916015625,
+        "y": 102.00001525878906,
         "wires": []
     },
     {
@@ -2653,8 +2742,8 @@
         "links": [
             "845631b1.04edb"
         ],
-        "x": 1214.666748046875,
-        "y": 155.88890075683594,
+        "x": 1204.6668090820312,
+        "y": 158.11114501953125,
         "wires": []
     },
     {
@@ -2696,8 +2785,9 @@
         "id": "ac32d4a6.793a58",
         "type": "subflow:fa882373.ddcd1",
         "z": "cf757416.97ca88",
-        "x": 758.2380676269531,
-        "y": 323.0317687988281,
+        "name": "",
+        "x": 1032.238037109375,
+        "y": 329.0317687988281,
         "wires": [
             [
                 "a6cb2200.99618"
@@ -2715,8 +2805,8 @@
         "links": [
             "5f0ab50a.1ba7e4"
         ],
-        "x": 865.7380676269531,
-        "y": 345.5317687988281,
+        "x": 1139.738037109375,
+        "y": 351.5317687988281,
         "wires": []
     },
     {
@@ -3525,8 +3615,8 @@
             {
                 "property": "req.headers.content-type",
                 "propertyType": "msg",
-                "type": "cont",
-                "value": "image",
+                "type": "eq",
+                "value": "image/jpeg",
                 "valueType": "str"
             }
         ],
@@ -3563,11 +3653,238 @@
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": "File is not an image file. Only JPEG, PNG or GIF files are accepted.",
+        "template": "File is not an image file. Only JPEG files are accepted.",
         "x": 908.888916015625,
         "y": 554.4444580078125,
         "wires": [
             []
+        ]
+    },
+    {
+        "id": "e7be5398.a59dd8",
+        "type": "subflow:7e125cac.4a335c",
+        "z": "cf757416.97ca88",
+        "x": 1246.1111450195312,
+        "y": 124.44442749023438,
+        "wires": [
+            [
+                "c18675e1.151718"
+            ],
+            [
+                "fee655f0.121ba8"
+            ]
+        ]
+    },
+    {
+        "id": "fee655f0.121ba8",
+        "type": "link out",
+        "z": "cf757416.97ca88",
+        "name": "addMeasure error output",
+        "links": [
+            "5f0ab50a.1ba7e4"
+        ],
+        "x": 1346.666748046875,
+        "y": 150.00001525878906,
+        "wires": []
+    },
+    {
+        "id": "5c95f385.c38914",
+        "type": "file in",
+        "z": "7e125cac.4a335c",
+        "name": "",
+        "filename": "",
+        "format": "",
+        "x": 541.6666870117188,
+        "y": 136.66665649414062,
+        "wires": [
+            [
+                "e576996b.0d90c"
+            ]
+        ]
+    },
+    {
+        "id": "595bf42.5f8318c",
+        "type": "function",
+        "z": "7e125cac.4a335c",
+        "name": "",
+        "func": "msg.filename = \"/home/pi/picture/\" + msg.req.params.id + \".jpg\";\n\nif (msg.headers == null) {\n    msg.headers = [];\n}\nmsg.headers['Content-Type'] = 'image/jpeg';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 332.77777777777777,
+        "y": 142.22222222222223,
+        "wires": [
+            [
+                "5c95f385.c38914"
+            ]
+        ]
+    },
+    {
+        "id": "7bdbdac7.8a9204",
+        "type": "catch",
+        "z": "7e125cac.4a335c",
+        "name": "",
+        "scope": null,
+        "x": 337.2222900390625,
+        "y": 210,
+        "wires": [
+            [
+                "b746c113.165588"
+            ]
+        ]
+    },
+    {
+        "id": "b746c113.165588",
+        "type": "template",
+        "z": "7e125cac.4a335c",
+        "name": "Generic message",
+        "field": "error.message",
+        "fieldType": "msg",
+        "format": "text",
+        "syntax": "plain",
+        "template": "Cannot find requested file.",
+        "x": 541.6666666666666,
+        "y": 205.55555555555554,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e576996b.0d90c",
+        "type": "debug",
+        "z": "7e125cac.4a335c",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "true",
+        "x": 717.2222222222222,
+        "y": 63.33333333333333,
+        "wires": []
+    },
+    {
+        "id": "665bdec9.608108",
+        "type": "debug",
+        "z": "cf757416.97ca88",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "true",
+        "x": 2371.6666666666665,
+        "y": 227.77777777777777,
+        "wires": []
+    },
+    {
+        "id": "b692332a.deb14",
+        "type": "switch",
+        "z": "cf757416.97ca88",
+        "name": "Dispatch resource identifier",
+        "property": "req.params.id",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nnull"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "outputs": 2,
+        "x": 810,
+        "y": 314,
+        "wires": [
+            [
+                "ac32d4a6.793a58"
+            ],
+            [
+                "28f867fb.2958b"
+            ]
+        ]
+    },
+    {
+        "id": "28f867fb.2958b",
+        "type": "subflow:98185682.0be158",
+        "z": "cf757416.97ca88",
+        "x": 1032,
+        "y": 370,
+        "wires": [
+            [
+                "a6cb2200.99618"
+            ],
+            [
+                "9245c5d1.f972c"
+            ]
+        ]
+    },
+    {
+        "id": "9245c5d1.f972c",
+        "type": "link out",
+        "z": "cf757416.97ca88",
+        "name": "addMeasure error output",
+        "links": [
+            "5f0ab50a.1ba7e4"
+        ],
+        "x": 1142,
+        "y": 402,
+        "wires": []
+    },
+    {
+        "id": "4827d04f.178758",
+        "type": "template",
+        "z": "98185682.0be158",
+        "name": "Build getJardin request",
+        "field": "topic",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "SELECT *\nFROM Espece;",
+        "x": 317.77783203125,
+        "y": 131.11111450195312,
+        "wires": [
+            [
+                "d3aa7112.fd2b1"
+            ]
+        ]
+    },
+    {
+        "id": "d3aa7112.fd2b1",
+        "type": "mysql",
+        "z": "98185682.0be158",
+        "mydb": "c0e93a6b.6b218",
+        "name": "",
+        "x": 543.8891906738281,
+        "y": 127.2222900390625,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "aa9f201.eb89d6",
+        "type": "template",
+        "z": "98185682.0be158",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "Internal server error.",
+        "x": 553.3333740234375,
+        "y": 210.00003051757812,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2f62e581.62339a",
+        "type": "catch",
+        "z": "98185682.0be158",
+        "name": "Catch generic error",
+        "scope": null,
+        "x": 380.00006103515625,
+        "y": 210.00003051757812,
+        "wires": [
+            [
+                "aa9f201.eb89d6"
+            ]
         ]
     }
 ]
