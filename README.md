@@ -28,6 +28,7 @@ The server offers the following API, respecting this URL format: `http://server/
 - [`plantation`](#plantation)
     * [Get a single plantation](#get-a-single-plantation)
     * [Add a plantation](#add-a-plantation)
+    * [Remove a plantation](#remove-a-plantation)
 - [`species`](#species)
     * [Get all the species](#get-all-the-species)
     * [Get a single species](#get-a-single-species)
@@ -123,6 +124,12 @@ The server offers the following API, respecting this URL format: `http://server/
         "date": "2017-04-29"
     }
     ```
+
+#### Remove a plantation
+
+- Method: DELETE
+- URL: `http://[server]/api/plantation/[plantation identifier]`
+- Example URL: `http://localhost:1880/api/plantation/1`
 
 ### `species`
 
