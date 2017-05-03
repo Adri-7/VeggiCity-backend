@@ -23,11 +23,13 @@ The server offers the following API, respecting this URL format: `http://server/
     * [Get a single garden](#get-a-single-garden)
     * [Get the plantations of a garden](#get-the-plantations-of-a-garden)
     * [Add a garden](#add-a-garden)
+    * [Get the picture of a garden](#get-the-picture-of-a-garden)
     * [Replace the picture of a garden](#replace-the-picture-of-a-garden)
 - [`plantation`](#plantation)
     * [Get a single plantation](#get-a-single-plantation)
     * [Add a plantation](#add-a-plantation)
 - [`species`](#species)
+    * [Get all the species](#get-all-the-species)
     * [Get a single species](#get-a-single-species)
 - [`measure`](#measure)
     * [Get the measures available for a plantation](#get-the-measures-available-for-a-plantation)
@@ -75,6 +77,12 @@ The server offers the following API, respecting this URL format: `http://server/
     }
     ```
 
+#### Get the picture of a garden
+
+- Method: GET
+- URL: `http://[server]/api/jardin/[garden identifier]/picture`
+- Example URL : `http://localhost:1880/api/jardin/1/picture`
+
 #### Replace the picture of a garden
 
 - Method: PUT
@@ -117,6 +125,12 @@ The server offers the following API, respecting this URL format: `http://server/
     ```
 
 ### `species`
+
+#### Get all the species
+
+- Method: GET
+- URL: `http://[server]/api/species`
+- Example URL: `http://localhost:1880/api/species`
 
 #### Get a single species
 
