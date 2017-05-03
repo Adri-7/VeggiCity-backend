@@ -29,6 +29,7 @@ The server offers the following API, respecting this URL format: `http://server/
     * [Get a single plantation](#get-a-single-plantation)
     * [Add a plantation](#add-a-plantation)
     * [Remove a plantation](#remove-a-plantation)
+    * [Add an event](#add-an-event)
 - [`species`](#species)
     * [Get all the species](#get-all-the-species)
     * [Get a single species](#get-a-single-species)
@@ -130,6 +131,22 @@ The server offers the following API, respecting this URL format: `http://server/
 - Method: DELETE
 - URL: `http://[server]/api/plantation/[plantation identifier]`
 - Example URL: `http://localhost:1880/api/plantation/1`
+
+#### Add an event
+
+- Method: POST
+- URL: `http://[server]/api/plantation/[plantation identifier]/event`
+- Body:
+    - `author` (`string`) : The pseudo of the user performing the event
+    - `description` (`string`) : The description of the event
+- Example URL: `http://localhost:1880/api/plantation/1/event`
+- Example Body:
+    ```
+    {
+        "author": "Michèle",
+        "species": "has watered the plants."
+    }
+    ```
 
 ### `species`
 
