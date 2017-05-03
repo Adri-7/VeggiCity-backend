@@ -30,6 +30,7 @@ The server offers the following API, respecting this URL format: `http://server/
     * [Add a plantation](#add-a-plantation)
     * [Remove a plantation](#remove-a-plantation)
     * [Add an event](#add-an-event)
+    * [Get the events of a plantation](#get-the-events-of-a-plantation)
 - [`species`](#species)
     * [Get all the species](#get-all-the-species)
     * [Get a single species](#get-a-single-species)
@@ -147,6 +148,12 @@ The server offers the following API, respecting this URL format: `http://server/
         "species": "has watered the plants."
     }
     ```
+
+#### Get the events of a plantation
+
+- Method: GET
+- URL: `http://[server]/api/plantation/[plantation identifier]/event`
+- Example URL: `http://localhost:1880/api/plantation/1/event`
 
 ### `species`
 
